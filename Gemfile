@@ -1,5 +1,14 @@
 source 'https://rubygems.org'
 
+
+## Custom gems
+gem 'mysql2'
+gem 'bootstrap-sass', '2.3.2.0'
+gem 'will_paginate', '3.0.4'
+gem 'bootstrap-will_paginate', '0.0.9'
+gem 'bcrypt-ruby', '~> 3.0.0'
+
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.1'
 
@@ -30,6 +39,11 @@ gem 'jbuilder', '~> 1.2'
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
+end
+
+group :development do
+	gem 'better_errors'
+	gem 'binding_of_caller'
 end
 
 # Use ActiveModel has_secure_password
