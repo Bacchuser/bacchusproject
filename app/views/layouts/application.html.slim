@@ -1,0 +1,41 @@
+doctype 5
+html
+  head
+    meta charset="utf-8"
+    meta http-equiv="X-UA-Compatible" content="IE=edge"
+    meta name="viewport" content="width=device-width, initial-scale=1"
+
+    / SEO Purpose
+    title Slim Examples
+    meta name="description" content="Slim test"
+    meta name="author" content="Bacchus project"
+
+
+    / STYLESHEETS
+    link rel="icon" type="image/png" href="favicon.png"
+    =stylesheet_link_tag "application", :media => "all", "data-turbolinks-track" => true
+
+
+    / To avoid embedding in Iframe
+    =csrf_meta_tags
+
+    /TODO
+    /[ ] Append opengraph metatags for easysharing on FB
+    /[ ] Add metatags SEO friendly
+  body
+
+    /SEO WARN : one h1 by page.
+    h1 Slim test
+
+    #content role="main"
+      p
+        |
+          Slim paragraph is multilines.<br />
+          So it's quiet readable for the front-end developper.<br />
+          Even he has to learn this language :D
+
+
+    == yield
+
+    #footer role="footer"
+      | Copyright &copy; #{@year} Bacchus Project
