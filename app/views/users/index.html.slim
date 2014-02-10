@@ -1,0 +1,27 @@
+h1 Listing users
+
+table
+  tr
+    th Created at
+    th Updated at
+    th Last ip
+    th Email
+    th Is email valid
+    th
+    th
+    th
+
+  - @users.each do |user|
+    tr
+      td = user.created_at
+      td = user.updated_at
+      td = user.last_ip
+      td = user.email
+      td = user.is_email_valid
+      td = link_to 'Show', user
+      td = link_to 'Edit', edit_user_path(user)
+      td = link_to 'Destroy', user, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New User', new_user_path

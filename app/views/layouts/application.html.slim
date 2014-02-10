@@ -23,19 +23,13 @@ html
     /[ ] Append opengraph metatags for easysharing on FB
     /[ ] Add metatags SEO friendly
   body
-
-    /SEO WARN : one h1 by page.
-    h1 Slim test
-
     #content role="main"
-      p
-        |
-          Slim paragraph is multilines.<br />
-          So it's quiet readable for the front-end developper.<br />
-          Even he has to learn this language :D
+      == yield
 
-
-    == yield
+    - if notice
+      div class="notice" = notice
+    - if alert
+      div class="alert" = alert
 
     #footer role="footer"
       | Copyright &copy; #{@year} Bacchus Project

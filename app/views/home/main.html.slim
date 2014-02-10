@@ -1,0 +1,18 @@
+h1 Hello User !
+
+- if @public_events.any?
+      ul.public_event_list
+        - for public_event in public_events
+            div class="event#{public_event.id}"
+                public_event.description
+- else
+    p No public events !
+
+- if cake_plan_user_signed_in?
+    p you are logged in :D
+- else
+    p you are not logged in
+    ul
+      = render 'devise/menu/login_items'
+      = render 'devise/menu/registration_items'
+

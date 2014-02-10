@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  created_at: 2014-02-10
+  updated_at: 2014-02-10
+  label: MyString
+  is_visible: false
+
+two:
+  created_at: 2014-02-10
+  updated_at: 2014-02-10
+  label: MyString
+  is_visible: false

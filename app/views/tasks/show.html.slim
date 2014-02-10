@@ -1,0 +1,18 @@
+p#notice = notice
+
+p
+  strong Created at:
+  = @task.created_at
+p
+  strong Updated at:
+  = @task.updated_at
+p
+  strong Label:
+  = @task.label
+p
+  strong Is visible:
+  = @task.is_visible
+
+= link_to 'Edit', edit_task_path(@task)
+'|
+= link_to 'Back', tasks_path
