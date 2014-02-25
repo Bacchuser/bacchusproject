@@ -28,4 +28,7 @@ Bacchus::Application.configure do
   config.assets.debug = true
 
   Slim::Engine.set_default_options pretty: true, sort_attrs: true
+
+  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+
 end

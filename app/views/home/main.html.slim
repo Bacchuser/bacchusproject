@@ -1,18 +1,44 @@
-h1 Hello User !
-
-- if @public_events.any?
-      ul.public_event_list
-        - for public_event in public_events
-            div class="event#{public_event.id}"
-                public_event.description
-- else
-    p No public events !
 
 - if cake_plan_user_signed_in?
-    p you are logged in :D
+  h1 Hello Cake Plan User !
 - else
-    p you are not logged in
-    ul
-      = render 'devise/menu/login_items'
-      = render 'devise/menu/registration_items'
+  h1 Hello Anonymus User !
+  ul
+    = render 'devise/menu/login_items'
+    = render 'devise/menu/registration_items'
 
+p#notice = notice
+
+/ All user, even not registred can create an event
+h2 Create an new event
+= form_for :new_task, :url => {:action=>'create_event'} do |form|
+  .field
+    = form.label :label
+    = form.text_field :label
+  .field
+    = form.label :is_visible
+    = form.check_box :is_visible
+  .field
+    = form.label :description
+    br
+    = form.text_area :description, :rows => 10, :cols => 70
+  .field
+    = form.label :is_public
+    = form.check_box :is_public
+  .actions = form.submit 'Save'
+
+
+- if @public_events.count > 0
+  ul.public_event_list
+    - for public_event in @public_events
+      div class = "event#{public_event.id}"
+        h3
+          # #{public_event.id}.  #{public_event.label}
+        p <strong>Description </strong> #{public_event.description}
+        ul
+          - unless not public_event.is_public
+            li PUBLIC
+          - unless not public_event.is_visible
+            li VISIBLE
+- else
+  p No public events !

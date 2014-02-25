@@ -9,4 +9,5 @@ class CakePlanUser < ActiveRecord::Base
 
   def register?; id? end
 
+
 end

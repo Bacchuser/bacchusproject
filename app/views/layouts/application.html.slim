@@ -17,19 +17,21 @@ html
 
 
     / To avoid embedding in Iframe
-    =csrf_meta_tags
+    = csrf_meta_tags
 
     /TODO
     /[ ] Append opengraph metatags for easysharing on FB
     /[ ] Add metatags SEO friendly
   body
+
     #content role="main"
+      - if notice
+        div.website_message.notice = notice
+      - if alert
+        div.website_message.alert = alert
+
       == yield
 
-    - if notice
-      div class="notice" = notice
-    - if alert
-      div class="alert" = alert
 
     #footer role="footer"
       | Copyright &copy; #{@year} Bacchus Project
