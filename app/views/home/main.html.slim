@@ -1,44 +1,40 @@
 
 - if cake_plan_user_signed_in?
-  h1 Hello Cake Plan User !
+    /! New event button
+    /! ===
+    .row
+      .page-header
+        h1 Dashboard
+      .col-lg-2
+        = link_to "Create an event", {:action => :new_event},
+          :class => ["btn",  "btn-primary", "btn-sm"]
+
+    /! List of my events.
+    /! ===
+    - if @my_events.count > 0
+      .my_events_list
+        - for my_event in @my_events
+          div class = "event#{my_event.id}"
+            h3
+              # #{my_event.id}.  #{my_event.label}
+            p <strong>Description </strong> #{my_event.description}
+            ul
+              - unless not my_event.is_public
+                li PUBLIC
+              - unless not my_event.is_visible
+                li VISIBLE
+    - else
+      .row
+        .col-lg-6.col-lg-offset-3
+          .alert.alert-info You don't have any event !
+
 - else
-  h1 Hello Anonymus User !
-  ul
-    = render 'devise/menu/login_items'
-    = render 'devise/menu/registration_items'
+    h1 Hello Visitor !
+    p You are not logged. Please login to access to your account.
 
-p#notice = notice
+    .row
+      .col-lg-3.col-lg-offset-1
+        .btn-group.btn-group-justified
+          = render 'devise/menu/login_items'
+          = render 'devise/menu/registration_items'
 
-/ All user, even not registred can create an event
-h2 Create an new event
-= form_for :new_task, :url => {:action=>'create_event'} do |form|
-  .field
-    = form.label :label
-    = form.text_field :label
-  .field
-    = form.label :is_visible
-    = form.check_box :is_visible
-  .field
-    = form.label :description
-    br
-    = form.text_area :description, :rows => 10, :cols => 70
-  .field
-    = form.label :is_public
-    = form.check_box :is_public
-  .actions = form.submit 'Save'
-
-
-- if @public_events.count > 0
-  ul.public_event_list
-    - for public_event in @public_events
-      div class = "event#{public_event.id}"
-        h3
-          # #{public_event.id}.  #{public_event.label}
-        p <strong>Description </strong> #{public_event.description}
-        ul
-          - unless not public_event.is_public
-            li PUBLIC
-          - unless not public_event.is_visible
-            li VISIBLE
-- else
-  p No public events !

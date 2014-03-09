@@ -9,7 +9,8 @@ Bacchus::Application.routes.draw do
 
   resources :home do
     collection do
-      post 'create_event'
+      get :new_event
+      post :create_event
     end
   end
 

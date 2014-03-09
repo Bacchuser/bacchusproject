@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140210132932) do
+ActiveRecord::Schema.define(version: 20140225204418) do
 
   create_table "admin_tasks", force: true do |t|
     t.integer  "task_id"
@@ -47,11 +47,28 @@ ActiveRecord::Schema.define(version: 20140210132932) do
     t.datetime "updated_at"
   end
 
+  create_table "task_trees", force: true do |t|
+    t.integer  "event_id"
+    t.integer  "tree_level"
+    t.integer  "left_tree"
+    t.integer  "right_tree"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "tasks", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "task_tree_id", null: false
     t.string   "label"
     t.boolean  "is_visible"
+  end
+
+  create_table "user_admins", force: true do |t|
+    t.integer  "cake_plan_user_id"
+    t.integer  "admin_task_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|

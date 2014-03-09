@@ -6,32 +6,47 @@ html
     meta name="viewport" content="width=device-width, initial-scale=1"
 
     / SEO Purpose
-    title Slim Examples
-    meta name="description" content="Slim test"
+    title TODO setTitle
+    meta name="description" content="Bacchus project test"
     meta name="author" content="Bacchus project"
 
 
     / STYLESHEETS
     link rel="icon" type="image/png" href="favicon.png"
-    =stylesheet_link_tag "application", :media => "all", "data-turbolinks-track" => true
+    =stylesheet_link_tag "bootswatch.min", :media => "all"
+    =stylesheet_link_tag "bootstrap-responsive.min", :media => "all"
+    =stylesheet_link_tag "home", :media => "all", "data-turbolinks-track" => true
 
-
+    / JAVASCRIPT
+    =javascript_include_tag "jquery.min"
+    =javascript_include_tag "bootstrap.min"
+    =javascript_include_tag "html5shiv-printshiv.min"
     / To avoid embedding in Iframe
     = csrf_meta_tags
-
-    /TODO
-    /[ ] Append opengraph metatags for easysharing on FB
-    /[ ] Add metatags SEO friendly
   body
 
-    #content role="main"
-      - if notice
-        div.website_message.notice = notice
-      - if alert
-        div.website_message.alert = alert
+    .container role="main"
+      - if notice or alert
+        .row
+        - if notice
+          .website_message.notice.col-lg-10.col-lg-offset-2
+            .alert.alert-dismissable.alert-info = notice
+        - if alert
+          .website_message.alert.col-lg-10.col-lg-offset-2
+            .alert.alert-dismissable.alert-danger = alert
 
-      == yield
+      .row
+        .col-lg-2
+          .row.page-header
+            .btn-group-vertical
+              = link_to "Home", {:controller => '/home', :action=>:main}, :class => ["btn", "btn-default"]
+              = link_to "Create Event", {:controller => '/home', :action=>:new_event}, :class => ["btn", "btn-default"]
+              .btn.btn-default Navigation 3
+              .btn.btn-default Navigation 4
+        .col-lg-10
+          == yield
 
-
-    #footer role="footer"
-      | Copyright &copy; #{@year} Bacchus Project
+      footer role="footer"
+        .row
+          .col-lg-10.col-lg-offset-2.well.well-sm
+            Copyright &copy; #{@year} Bacchus Project

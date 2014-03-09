@@ -3,9 +3,9 @@ class CreateTasks < ActiveRecord::Migration
     create_table :tasks do |t|
       t.date :created_at
       t.date :updated_at
+      t.integer :task_tree_id , :null => false
       t.string :label
       t.boolean :is_visible
-
       t.timestamps
     end
   end

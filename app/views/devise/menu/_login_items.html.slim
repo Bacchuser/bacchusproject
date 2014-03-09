@@ -1,6 +1,5 @@
 - if cake_plan_user_signed_in?
-  li
-    = link_to('Logout', destroy_cake_plan_user_session_path, :method => :delete)
+   = link_to('Logout', destroy_cake_plan_user_session_path, :method => :delete, :class => "btn btn-primary btn-sm")
+
 - else
-  li
-    = link_to('Login', new_cake_plan_user_session_path)
+   = link_to('Login', new_cake_plan_user_session_path, :class => "btn btn-primary btn-sm" )

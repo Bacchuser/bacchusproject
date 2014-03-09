@@ -1,13 +1,10 @@
 class HomeController < ApplicationController
 
   def main
-    if current_user.register?
-      @current_user = current_user
-    else
-      @current_user = CakePlanUser.new
-    end
+    @my_events = AdminTaskPresenter.from_admin_tasks(AdminTask.all)
+  end
 
-    @public_events = AdminTaskPresenter.all
+  def new_event
 
   end
 

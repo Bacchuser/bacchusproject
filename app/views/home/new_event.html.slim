@@ -1,0 +1,33 @@
+/ All user, even not registred can create an event
+h1 Create a new event
+= form_for :new_task, :url => {:action=>'create_event'} do |form|
+  .form-vertical
+    .row.form-group
+      = form.label :label,
+        :class => ["col-lg-2"]
+      = form.text_field :label,
+        :autofocus => true, :class => ["col-lg-10", "input-sm"]
+
+
+    .row.form-group
+      = form.label :description,
+        :class => ["col-lg-2"]
+      br
+      = form.text_area :description,
+        :rows => 10,
+        :class => ["col-lg-10"]
+
+    .row.form-group
+      .col-lg-12
+        = form.check_box :is_visible
+        = form.label :is_visible
+
+    .row.form-group
+      .col-lg-12
+        = form.check_box :is_public
+        = form.label :is_public
+
+    .row.actions
+      = form.submit 'Save', :class => ["btn", "btn-success", "btn-lg", "col-lg-3", "col-lg-offset-2"]
+
+  br

@@ -1,0 +1,13 @@
+netwizz
+
+retrieve all the new comments in a file
+retrieve all the new likes of comments
+retrieve all the new posts in a file
+
+
+post_id | post | created_by
++-------+------+----------------
+2       |  bla | hadrien.froger
+
+
+comments | posted_at |
