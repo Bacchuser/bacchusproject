@@ -2,19 +2,18 @@
 - if cake_plan_user_signed_in?
     /! New event button
     /! ===
-    .row
-      .page-header
-        h1 Dashboard
-      .col-lg-2
-        = link_to "Create an event", {:action => :new_event},
-          :class => ["btn",  "btn-primary", "btn-sm"]
+    .page-header
+      h1 Dashboard
+    .col-lg-2.col-lg-offset-1
+
+      = link_to "Create an event", {:action => :new_event},
+        :class => ["btn",  "btn-primary", "btn-sm"], :style => "margin : 100px 0;"
 
     /! List of my events.
     /! ===
-    - if @my_events.count > 0
-      .my_events_list
-        - for my_event in @my_events
-          div class = "event#{my_event.id}"
+    - if @events_to_admin.count > 0
+        - for my_event in @events_to_admin
+          .col-lg-4
             h3
               # #{my_event.id}.  #{my_event.label}
             p <strong>Description </strong> #{my_event.description}
@@ -23,6 +22,8 @@
                 li PUBLIC
               - unless not my_event.is_visible
                 li VISIBLE
+            li
+              .label.label-info ADMIN
     - else
       .row
         .col-lg-6.col-lg-offset-3

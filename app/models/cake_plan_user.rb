@@ -8,6 +8,4 @@ class CakePlanUser < ActiveRecord::Base
          :confirmable, :lockable
 
   def register?; id? end
-
-
 end

@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
 
   def main
-    @my_events = AdminTaskPresenter.from_admin_tasks(AdminTask.all)
+    @events_to_admin = AdminTaskPresenter.admin_role(current_cake_plan_user)
   end
 
   def new_event
@@ -10,9 +10,8 @@ class HomeController < ApplicationController
 
   def create_event
     @new_task = AdminTaskPresenter.new(params[:new_task])
-    @new_task.save
     respond_to do |format|
-      if request.post? && @new_task.save
+      if request.post? && @new_task.create(current_cake_plan_user)
         format.html { redirect_to action: 'main', notice: 'AdminTask was successfully created.' }
       else
         format.html { redirect_to action: 'main', notice: 'AdminTask creation failed.' }
