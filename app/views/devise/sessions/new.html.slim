@@ -7,15 +7,13 @@ h2 Sign in
       :class => ["control-label",  "col-lg-2"]
     = form.email_field :email,
       :placeholder => "Email",
-      :autofocus => true,
-      :class => "col-lg-10"
+      :autofocus => true, :class => "col-lg-10"
 
   .row.form-group
     = form.label :password,
       :class => ["control-label", "col-lg-2"]
     = form.password_field :password,
-      :placeholder => "Password",
-      :class => "col-lg-10"
+      :placeholder => "Password", :class => "col-lg-10"
 
   - if devise_mapping.rememberable?
     .col-lg-2

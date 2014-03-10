@@ -3,7 +3,12 @@ Bacchus::Application.routes.draw do
 
   root 'home#main'
 
-  resources :tasks
+  resources :tasks, :except => [:show, :new, :edit, :create, :update, :destroy] do
+    member do
+      get :admin_event
+      get :organise
+    end
+  end
 
   resources :users
 
@@ -13,5 +18,7 @@ Bacchus::Application.routes.draw do
       post :create_event
     end
   end
+
+
 
 end

@@ -7,9 +7,16 @@ class AdminTaskPresenter < Presenter
                         :created_at=, :updated_at=, :label=, :is_visible=
 
   def_delegators :admin_task, :description, :is_public,
-                              :description=, :is_public=, :id
+                              :description=, :is_public=, :id, :start_at, :start_at=,
+                              :end_at, :end_at=
 
   def_delegators :admin_user
+
+  include ActiveModel::Validations
+
+  validates :label, :presence => true
+  validates :start_at, :presence => true
+  validates :end_at, :presence => true
 
   # Get the task, create a new if not set.
   def task; @task ||= Task.new end
@@ -60,11 +67,12 @@ class AdminTaskPresenter < Presenter
 
   # Save the actual task
   def save(update_user)
-    Task.transaction do
-      if task.new_record? or admin_task.new_record?
-        raise "Cannot save before create"
-      end
+    if task.new_record? or admin_task.new_record?
+      raise "Cannot save before create"
+    end
 
+    return false unless valid?
+    Task.transaction do
       task.save
       admin_task.save
       log_dependencies
@@ -76,6 +84,11 @@ class AdminTaskPresenter < Presenter
   #   - Save the data of the Task
   #   - Set the creator as an admin
   def create(creator)
+    if not task.new_record? or not admin_task.new_record?
+      raise "Object already exists !"
+    end
+
+    return false unless valid?
     TaskTree.transaction do
       create_task
       admin_task.task = task
@@ -87,6 +100,7 @@ class AdminTaskPresenter < Presenter
       admin_user.save
       log_dependencies
     end
+
   end
 
   # Set the admin task and it's parent

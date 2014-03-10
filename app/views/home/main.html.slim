@@ -1,29 +1,38 @@
 
 - if cake_plan_user_signed_in?
-    /! New event button
-    /! ===
     .page-header
       h1 Dashboard
-    .col-lg-2.col-lg-offset-1
 
-      = link_to "Create an event", {:action => :new_event},
+    /! New event button
+    / =====================
+    .col-lg-3.dashboard-elem.text-center
+      = link_to "Créer un évènement", {:action => :new_event},
         :class => ["btn",  "btn-primary", "btn-sm"], :style => "margin : 100px 0;"
 
-    /! List of my events.
-    /! ===
+    /! List of my events
+    / =====================
     - if @events_to_admin.count > 0
         - for my_event in @events_to_admin
-          .col-lg-4
-            h3
+          .my_event.desc.col-lg-3.dashboard-elem
+            strong.text-center
               # #{my_event.id}.  #{my_event.label}
-            p <strong>Description </strong> #{my_event.description}
-            ul
-              - unless not my_event.is_public
-                li PUBLIC
-              - unless not my_event.is_visible
-                li VISIBLE
-            li
-              .label.label-info ADMIN
+            p.text-center
+              i
+                |
+                  <small>#{my_event.start_at.to_s(:simple)}</small> ~
+                  <small>#{my_event.end_at.to_s(:simple)}</small>
+
+            p #{my_event.description}
+            hr
+            .row.text-center
+              .btn-group.btn-group-vertical
+                btn.btn-info.btn-sm ADMINISTRATEUR
+                = link_to "EDITER", {:controller => :tasks, :action => :admin_event, :id => my_event.id}, {:class => ["btn","btn-default","btn-sm"]}
+
+    / TODO List of events I have subscribe
+    / TODO Invitations of events
+    / List of public events that I have not subscribe
+
     - else
       .row
         .col-lg-6.col-lg-offset-3

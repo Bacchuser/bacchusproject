@@ -15,6 +15,8 @@ ActiveRecord::Schema.define(version: 20140225204418) do
 
   create_table "admin_tasks", force: true do |t|
     t.integer  "task_id"
+    t.datetime "start_at"
+    t.datetime "end_at"
     t.string   "description"
     t.boolean  "is_public"
     t.datetime "created_at"

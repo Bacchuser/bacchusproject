@@ -1,6 +1,16 @@
 / All user, even not registred can create an event
 h1 Create a new event
+
 = form_for :new_task, :url => {:action=>'create_event'} do |form|
+
+  - if errors
+    .alert.alert-danger
+      h3 We can not save your event :(
+      p Some errors occured...
+      ul
+        - errors.each do |error|
+           li = error
+
   .form-vertical
     .row.form-group
       = form.label :label,
@@ -8,13 +18,23 @@ h1 Create a new event
       = form.text_field :label,
         :autofocus => true, :class => ["col-lg-10", "input-sm"]
 
-
     .row.form-group
       = form.label :description,
         :class => ["col-lg-2"]
-      br
       = form.text_area :description,
         :rows => 10,
+        :class => ["col-lg-10"]
+
+    .row.form-group
+      = form.label :start_at,
+        :class => ["col-lg-2"]
+      = form.date_field :start_at,
+        :class => ["col-lg-10"]
+
+    .row.form-group
+      = form.label :end_at,
+        :class => ["col-lg-2"]
+      = form.date_field :end_at,
         :class => ["col-lg-10"]
 
     .row.form-group
