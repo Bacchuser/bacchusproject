@@ -1,4 +1,7 @@
+# A generic n-ary tree, You can add childs, remove a node and it's child,
+# and get some properties such as level, type(node, leaf).
 class TaskTree < ActiveRecord::Base
+
   #
   # Remove recursively all the childs.
   # Update all the tree to close the gap
@@ -6,12 +9,12 @@ class TaskTree < ActiveRecord::Base
   before_destroy do |perm|
     TaskTree.transaction do
       # Delete
-      childs_and_me = TaskTree.where("left_tree >= :left_tree AND right_tree <= :right_tree", { left_tree: left_tree, right_tree: right_tree } )
+      childs_and_me = TaskTree.where("event_id = :event_id AND left_tree >= :left_tree AND right_tree <= :right_tree", { event_id: event_id, left_tree: left_tree, right_tree: right_tree } )
       childs_and_me.delete_all
 
       # Update tree
-      right_part = TaskTree.where("right_tree >= :left_tree", { left_tree: left_tree } )
-      left_part = TaskTree.where("left_tree > :left_tree", { left_tree: left_tree } )
+      right_part = TaskTree.where("event_id = :event_id AND right_tree >= :left_tree", { event_id: event_id, left_tree: left_tree } )
+      left_part = TaskTree.where("event_id = :event_id AND left_tree > :left_tree", { event_id: event_id, left_tree: left_tree } )
 
       offset = right_tree - left_tree + 1
       right_part.update_all("right_tree = right_tree - :offset", { :offset => offset } )
@@ -27,11 +30,11 @@ class TaskTree < ActiveRecord::Base
   def add_child(node_label, description)
       TaskTree.transaction do
           # create an empty space in the tree
-          right_update = TaskTree.where("right_tree >= :right_tree", { right_tree: right_tree } )
-          right_update.update_all("right_tree = right_tree + 2")
+          right_update = TaskTree.where("event_id = :event_id AND right_tree >= :right_tree", { event_id: event_id, right_tree: right_tree } )
+          right_update.update_all("event_id = :event_id AND right_tree = right_tree + 2", { event_id: event_id })
 
-          left_update = TaskTree.where("left_tree >= :right_tree", { right_tree: right_tree } )
-          left_update.update_all("left_tree = left_tree + 2")
+          left_update = TaskTree.where("event_id = :event_id AND left_tree >= :right_tree", { event_id: event_id, right_tree: right_tree } )
+          left_update.update_all("event_id = :event_id AND left_tree = left_tree + 2", { event_id: event_id })
 
           new_task_tree = TaskTree.new do |task_tree|
             task_tree.left_tree = right_tree
@@ -55,13 +58,24 @@ class TaskTree < ActiveRecord::Base
       nil
     else
       TaskTree \
-        .where("right_tree > :child_right_tree AND left_tree < :child_left_tree AND tree_level = :tree_level", \
-          { child_right_tree: right_tree,
+        .where("event_id = :event_id AND right_tree > :child_right_tree AND left_tree < :child_left_tree AND tree_level = :tree_level", \
+          { event_id: event_id,
+            child_right_tree: right_tree,
             child_left_tree: left_tree,
             tree_level: tree_level - 1 } ).first
     end
   end
 
+  #
+  # Create a root for a new task, with a incremented event_id.
+  # The model is not saved in DB. Please use the .save() method
+  # whenever you want to insert it in DB.
+  #
+  def self.new_root
+      new_tree = TaskTree.new
+      new_tree.event_id = new_event_id
+      return new_tree
+  end
   #
   # Self explanatory
   #
@@ -69,6 +83,7 @@ class TaskTree < ActiveRecord::Base
     left_tree_pos = get_node_pos(label)
     #TODO return the instance with the left_tree_pos
   end
+
 
   #
   # Self explanatory
@@ -98,4 +113,18 @@ class TaskTree < ActiveRecord::Base
     def get_node_pos(node_label)
       left_tree
     end
+
+  #
+  # Get a new ID for a new tree.
+  #
+  def self.new_event_id
+    # create a new event in the task_tree, with a new event id
+    temp = TaskTree.order("event_id desc").limit(1).first
+    if temp.nil?
+      1
+    else
+      temp.event_id + 1
+    end
+  end
+
 end

@@ -1,3 +1,5 @@
+# Useless for now. Was an attempt to deploy Authority gem.
+# FIXEME dead code
 class User < ActiveRecord::Base
   include Authority::UserAbilities
   validates :username,

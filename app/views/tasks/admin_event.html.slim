@@ -1,7 +1,7 @@
 .row
   .col-lg-4
-    h3 = @task.label
-    span = @task.start_at.to_s(:simple)
+    h3 = @event.label
+    span = @event.start_at.to_s(:simple)
 
   .col-lg-3
       h3
@@ -31,7 +31,6 @@
         span.badge 10
         = "Non "
 
-
 .row
   .col-lg-4
     .panel.panel-default
@@ -60,16 +59,36 @@
                 li
                   a ouverte
 
-        / TODO mettre une pile de boutton badgé plutot
-        ul.list-group.clearfix
-          li.list-group-item.danger
+        .list-group.clearfix
+          a.list-group-item.danger href = "#link1"
             span.badge 2
-            a Son
-          li.list-group-item.danger
+            = "Son"
+          a.list-group-item.danger href = "#link2"
             span.badge 1
-            a Vidéo
-          li.list-group-item
+            = "Vidéo"
+          a.list-group-item href = "#link3"
             = "Vélo "
-          li.list-group-item
+          a.list-group-item href = "#link4"
             span.badge 2
             = "Voiture "
+
+  .col-lg-8
+    .well = form_for @task do |form|
+      .form-vertical
+        .row.form-group
+          = form.label "* Titre",
+            :class => ["control-label",  "col-lg-2"]
+          = form.text_field :label,
+            :placeholder => "Titre",
+            :autofocus => true, :class => "col-lg-10"
+        .row.form-group
+          = form.label "* Type",
+            :class => ["control-label",  "col-lg-2"]
+          select
+            option Liste
+            option Budget
+            option Map
+        .row.form-group
+          = form.label "* Assigné à",
+            :class => ["control-label",  "col-lg-2"]
+          input type="text" class = ["control-label",  "col-lg-10"] placeholder = "Assigné à "
