@@ -44,7 +44,7 @@
         .row.page-header
           .col-lg-1
           .col-lg-6
-            button.btn.btn-success.inline + Tâche
+            = link_to "+ Tâche", {:action => :new_task}, { :class => ["btn", "btn-success", "inline" ] }
           .col-lg-3
             .btn-group
               button.btn.btn-default.dropdown-toggle data-toggle = :dropdown
@@ -60,35 +60,19 @@
                   a ouverte
 
         .list-group.clearfix
-          a.list-group-item.danger href = "#link1"
-            span.badge 2
-            = "Son"
-          a.list-group-item.danger href = "#link2"
-            span.badge 1
-            = "Vidéo"
-          a.list-group-item href = "#link3"
-            = "Vélo "
-          a.list-group-item href = "#link4"
-            span.badge 2
-            = "Voiture "
+          - @tasks.each do |task|
+            - if task.new?
+              = link_to task.label, {:action => :admin_event, :task_id => task.id}, { :class => ["list-group-item", "new"]}
+            - else
+              = link_to task.label, {:action => :admin_event, :task_id => task.id}, { :class => ["list-group-item"]}
+
 
   .col-lg-8
-    .well = form_for @task do |form|
-      .form-vertical
-        .row.form-group
-          = form.label "* Titre",
-            :class => ["control-label",  "col-lg-2"]
-          = form.text_field :label,
-            :placeholder => "Titre",
-            :autofocus => true, :class => "col-lg-10"
-        .row.form-group
-          = form.label "* Type",
-            :class => ["control-label",  "col-lg-2"]
-          select
-            option Liste
-            option Budget
-            option Map
-        .row.form-group
-          = form.label "* Assigné à",
-            :class => ["control-label",  "col-lg-2"]
-          input type="text" class = ["control-label",  "col-lg-10"] placeholder = "Assigné à "
+    - if @task
+      = subclass_partial(@task)
+    - else
+      .alert.alert-info.text-center
+        p Vous n'avez pas de tâche pour cet évènement !
+        p Créer une nouvelle tâche :
+        = link_to "+ Tâche", {:action => 'new_task'}, { :class => ["btn", "btn-success", "inline" ] }
+

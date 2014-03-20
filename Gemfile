@@ -1,10 +1,14 @@
 source 'https://rubygems.org'
 
-# Use SCSS for stylesheets
-gem 'sass-rails'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.2'
+
+# Authentification, OWASP okay
+gem 'devise'
+
+# Use SCSS for stylesheets
+gem 'sass-rails'
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
@@ -29,7 +33,6 @@ gem 'bcrypt-ruby', '~> 3.1.2'
 
 # Manage role and permission ORM independant's way
 gem 'authority'
-
 
 group :development do
     # Slim, for badass HTML compilation

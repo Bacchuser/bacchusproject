@@ -18,3 +18,12 @@
 .danger .badge{
   background-color : red;
 }
+
+.list-group-item.new {
+  margin-bottom: 3px;
+  border-color: #313131;
+  .badge{
+    background-color : orange;
+    color : white;
+  }
+}

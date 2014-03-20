@@ -11,17 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140225204418) do
-
-  create_table "admin_tasks", force: true do |t|
-    t.integer  "task_id"
-    t.datetime "start_at"
-    t.datetime "end_at"
-    t.string   "description"
-    t.boolean  "is_public"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+ActiveRecord::Schema.define(version: 20140318080859) do
 
   create_table "cake_plan_users", force: true do |t|
     t.integer  "user_id"
@@ -49,11 +39,21 @@ ActiveRecord::Schema.define(version: 20140225204418) do
     t.datetime "updated_at"
   end
 
-  create_table "task_trees", force: true do |t|
-    t.integer  "event_id"
-    t.integer  "tree_level"
-    t.integer  "left_tree"
-    t.integer  "right_tree"
+  create_table "events", force: true do |t|
+    t.integer  "task_id"
+    t.datetime "start_at"
+    t.datetime "end_at"
+    t.string   "description"
+    t.boolean  "is_public"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "simple_tasks", force: true do |t|
+    t.integer  "task_id"
+    t.datetime "start_at"
+    t.datetime "end_at"
+    t.datetime "alert_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -61,14 +61,17 @@ ActiveRecord::Schema.define(version: 20140225204418) do
   create_table "tasks", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "task_tree_id", null: false
     t.string   "label"
     t.boolean  "is_visible"
+    t.integer  "event_id"
+    t.integer  "tree_level"
+    t.integer  "left_tree"
+    t.integer  "right_tree"
   end
 
   create_table "user_admins", force: true do |t|
     t.integer  "cake_plan_user_id"
-    t.integer  "admin_task_id"
+    t.integer  "task_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

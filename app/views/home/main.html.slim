@@ -11,7 +11,7 @@
 
     /! List of my events
     / =====================
-    - if @events_to_admin.count > 0
+    - if not @events_to_admin.nil? and @events_to_admin.count > 0
         - for my_event in @events_to_admin
           .my_event.desc.col-lg-3.dashboard-elem
             strong.text-center
@@ -27,7 +27,7 @@
             .row.text-center
               .btn-group.btn-group-vertical
                 btn.btn-info.btn-sm ADMINISTRATEUR
-                = link_to "GERER", {:controller => :tasks, :action => :admin_event, :id => my_event.id}, {:class => ["btn","btn-default","btn-sm"]}
+                = link_to "GERER", {:controller => :tasks, :action => :admin_event, :id => my_event.task.id}, {:class => ["btn","btn-default","btn-sm"]}
 
     / TODO List of events I have subscribe
     / TODO Invitations of events
