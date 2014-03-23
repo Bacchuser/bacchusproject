@@ -26,8 +26,8 @@ class Task < ActiveRecord::Base
         AND left_tree > :left_tree """, { event_id: event_id, left_tree: left_tree } )
 
       offset = right_tree - left_tree + 1
-      right_part.update_all("right_tree = right_tree - :offset", { :offset => offset } )
-      left_part.update_all("left_tree = left_tree - :offset", { :offset => offset } )
+      right_part.update_all(["right_tree = right_tree - :offset", { offset: offset } ])
+      left_part.update_all(["left_tree = left_tree - :offset", { offset: offset } ])
     end
   end
 
@@ -40,13 +40,17 @@ class Task < ActiveRecord::Base
   end
 
   def new?
-    # TODO is new if no subclass exists.
-    not is_visible
+    subclass.nil?
+  end
+
+  def subclass?
+    false
   end
 
   def subclass
-    "hello"
+    @task_subclass ||= SimpleTask.where("task_id = :task_id", { task_id: self.id }).first or nil
   end
+
   #
   # Add a child to the current leaf/node.
   # Return the new child created.
@@ -60,7 +64,6 @@ class Task < ActiveRecord::Base
       right_update = Task.where("""
         event_id = :event_id
         AND right_tree >= :right_tree """, { event_id: self.event_id, right_tree: self.right_tree } )
-
       right_update.update_all right_tree: "right_tree + 2"
 
       left_update = Task.where("""
@@ -123,11 +126,10 @@ class Task < ActiveRecord::Base
     #TODO return the instance with the left_tree_pos
   end
 
-
   #
   # Self explanatory
   #
-  def is_leaf?
+  def leaf?
     # Left and Right continuous ?
     return (right_tree - left_tree == 1)
   end
@@ -145,11 +147,11 @@ class Task < ActiveRecord::Base
   end
 
   private
-    #
-    # Get the node position in the adjacent interval
-    # implemention of the label given.
-    #
-    def get_node_pos(node_label)
-      left_tree
-    end
+  #
+  # Get the node position in the adjacent interval
+  # implemention of the label given.
+  #
+  def get_node_pos(node_label)
+    left_tree
+  end
 end

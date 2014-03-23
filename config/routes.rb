@@ -12,8 +12,8 @@ Bacchus::Application.routes.draw do
 
     member do
       get 'admin_event(/:task_id)', :action => :admin_event, :as => :admin_event
+      post 'update_subtask/:task_id', :action => :update_subtask, :as => :update_subtask
       get :new_task
-      post :save_task
     end
   end
 

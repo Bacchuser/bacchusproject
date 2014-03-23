@@ -8,10 +8,10 @@ class UserAdmin < ActiveRecord::Base
   belongs_to :task, dependent: :destroy
 
   def user_role
-    cake_plan_user
+    self.cake_plan_user
   end
 
   def task_role
-    task
+    self.task
   end
 end

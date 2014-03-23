@@ -50,12 +50,7 @@ class EventPresenter < Presenter
     # Go and search for the different admin roles
     # the user has. Then from the tree we will be able to look for
     # the event data.
-    admin_roles = UserAdmin.find_by_sql ["""
-      SELECT user_admins.task_id,
-             user_admins.cake_plan_user_id
-      FROM user_admins
-      WHERE user_admins.cake_plan_user_id = ?
-    """, user.id]
+    admin_roles = UserAdmin.where("cake_plan_user_id = :user_id", {user_id: user.id} )
     all_tasks_to_admin = []
     admin_roles.each do |admin_role|
       all_tasks_to_admin << self.from_role(admin_role)
@@ -68,13 +63,14 @@ class EventPresenter < Presenter
   # This role can be anything (like admin, oraganisation, see, notification).
   def self.from_role(role)
     raise "Role is null !" if role.nil?
-
+    raise "Role's user is null !" if role.user_role.nil?
+    raise "Role's task is null !" if role.task_role.nil?
     presenter = EventPresenter.new(nil)
-    # TODO use the traditional ORM to find the good event.
 
     # From the role, we can find the Event task associate,
     # and the particular data of the subclass.
-    presenter.event = Event.where("task_id = :task_id", { task_id: role.task_role.id } ).limit(1).first
+    presenter.event = Event.where("task_id = :task_id", { task_id: role.task.id } ).limit(1).first
+    Rails.logger.info presenter.inspect
     presenter.admin_user = role.user_role
     return presenter
   end

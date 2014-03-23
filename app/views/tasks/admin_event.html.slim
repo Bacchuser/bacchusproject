@@ -61,10 +61,8 @@
 
         .list-group.clearfix
           - @tasks.each do |task|
-            - if task.new?
-              = link_to task.label, {:action => :admin_event, :task_id => task.id}, { :class => ["list-group-item", "new"]}
-            - else
-              = link_to task.label, {:action => :admin_event, :task_id => task.id}, { :class => ["list-group-item"]}
+            = link_to task.label, {:action => :admin_event, :task_id => task.id}, { :class => navigation_class(task)}
+
 
 
   .col-lg-8

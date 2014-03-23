@@ -1,4 +1,4 @@
-.well = form_for @task, url: { action: :save_task } do |form|
+.well = form_for @task , url: { action: :update_subtask, task_id: @task.id }, method: :post do |form|
   .form-vertical
     .row.form-group
       = form.label "* Titre",
@@ -10,8 +10,7 @@
       = form.label "* Type",
         :class => ["control-label",  "col-lg-2"]
       .col-lg-10
-        select.form-control
-          option Simple - To do
+        = select :custom, :type, [ ["option Simple - To do", "simple_task"] ]
     .row.form-group
       = form.label "* Assigné à",
         :class => ["control-label",  "col-lg-2"]
@@ -19,12 +18,9 @@
 
     .row.form-group
       .btn-group.btn-group-horizontal.col-lg-offset-2.col-lg-12
-        = form.button "Cancel",
+        = form.button "Annuler",
           :class => ["control-label", "btn", "btn-danger", "btn-sm"],
           :name => "save_status", :value => "cancel"
-        = form.button "Save",
+        = form.button "Sauver et Continuer ",
           :class => ["control-label", "btn", "btn-success", "btn-sm"],
-          :name => "save_status", :value => "save"
-        = form.button "Save and Publish",
-          :class => ["control-label", "btn", "btn-success", "btn-sm"],
-          :name => "save_status", :value => "savenpublish"
+          :name => "save_status", :value => "create"
