@@ -7,6 +7,10 @@ class CreateTasks < ActiveRecord::Migration
       t.boolean :is_visible
 
       t.integer :event_id
+
+      t.string :subclass_name
+      t.integer :subclass_id
+
       t.integer :tree_level
       t.integer :left_tree
       t.integer :right_tree
