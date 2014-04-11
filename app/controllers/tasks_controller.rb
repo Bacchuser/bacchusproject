@@ -5,7 +5,7 @@ class TasksController < ApplicationController
   def admin_event
     # TODO change to query the tree : task_id and level = 1.
     role = UserAdmin.where("task_id = ? AND cake_plan_user_id = ?",
-      params[:id], current_cake_plan_user.id).limit(1).first
+      params[:id], current_cake_plan_user.id).limit(1).first!
     @event = EventPresenter.from_role(role)
 
     # All the task
@@ -21,15 +21,10 @@ class TasksController < ApplicationController
         { id: params[:task_id] } ).limit(1).first
     end
 
-    if @tasks.count == 0
-      return
-    end
-
-    if task.nil?
-      return respond_to do |format|
+    return if @tasks.count == 0
+    return respond_to do |format|
         format.html {redirect_to admin_event_task_url(@event.task), alert: "subtask not exists !" }
-      end
-    end
+    end if task.nil?
 
     # We edit the subclass.
     if task.new?
@@ -60,6 +55,7 @@ class TasksController < ApplicationController
 
   def update_subtask
     params.require(:task_id)
+    params.require(:save_status)
     task = Task.find(params[:task_id])
 
     case params[:save_status].downcase
@@ -76,6 +72,11 @@ class TasksController < ApplicationController
 
   private
   def delete_subtask(task)
+    Rails.logger.info "\n\nDELETE"
+    Rails.logger.info task.inspect
+    Rails.logger.info UserAdmin.where("task_id = ?", task.id).inspect
+    Rails.logger.info "/DELETE\n\n"
+
     task.destroy
     respond_to do |format|
         format.html { redirect_to admin_event_task_url(parent_event),
@@ -84,35 +85,50 @@ class TasksController < ApplicationController
   end
 
   def create_subtask(task)
-    task.save!
     subclass = nil
-    message = "" # TODO use i18n
-    case params[:custom][:type].downcase
-    when "simple_task"
-      subclass = SimpleTask.new do |simple_task|
-        simple_task.task = task
-      end
-      message = "Simple Task"
-    else
-      raise "Type not exists : " + params[:custom][:type].downcase
+    message = ""
+    subclass_name = params[:custom][:type].downcase
+    if not Task::SUBCLASS_CLASSES.has_key?(subclass_name)
+      raise "Type not exists : " + subclass_name + Task::SUBCLASS_CLASSES.inspect
     end
 
-    subclass.save!
+    subclass = Task::SUBCLASS_CLASSES[subclass_name].new do |new_subclass|
+      new_subclass.task = task
+    end
+
+    saved = Task.transaction do
+      subclass.save!
+      task.update(params.
+        require(:task).
+        permit(:label).
+        deep_merge( { subclass_id: subclass.id, subclass_name: subclass_name } ))
+      task.save!
+    end
+
     respond_to do |format|
+      if saved
         format.html { redirect_to admin_event_task_url(parent_event, task_id: task.id),
-          notice: message + " created" }
+          notice: "Task created (" << task.subclass_name << ")" }
+      end
     end
   end
 
   def save_subtask(task)
-    raise "Not subclass of Task" if task.new?
-    Task.transaction do
-      task.save!
-      task.subclass.save!
+    save_succeed = Task.transaction do
+      task.update(params.require(:task).permit(:label))
+      # we allow all the attributes to mass asignements.
+      subtask_params = task.subclass.class.attribute_names
+      task.subclass.update(params.require(:subtask).permit(subtask_params))
     end
+
     respond_to do |format|
-        format.html { redirect_to admin_event_task_url(parent_event, task_id: task.id ),
-          notice: task.subclass.class.name + " saved" }
+      if save_succeed
+        format.html { redirect_to admin_event_task_url(parent_event, task_id: task.id),
+          notice: "Task saved (" << task.subclass_name << ")" }
+      else
+        format.html { redirect_to admin_event_task_url(parent_event, task_id: task.id),
+          notice: "Task not saved (" << task.subclass_name << ")" }
+      end
     end
   end
 

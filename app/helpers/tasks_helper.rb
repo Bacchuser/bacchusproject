@@ -2,7 +2,7 @@ module TasksHelper
 
   def subclass_partial(task)
     if task.subclass?
-      render partial: task.class.name.tr(':', '_').downcase
+      render partial: task.class.name.demodulize.downcase
     else
       render partial: 'new_task'
     end

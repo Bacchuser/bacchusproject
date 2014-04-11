@@ -70,7 +70,6 @@ class EventPresenter < Presenter
     # From the role, we can find the Event task associate,
     # and the particular data of the subclass.
     presenter.event = Event.where("task_id = :task_id", { task_id: role.task.id } ).limit(1).first
-    Rails.logger.info presenter.inspect
     presenter.admin_user = role.user_role
     return presenter
   end

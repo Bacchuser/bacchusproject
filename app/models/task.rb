@@ -1,6 +1,7 @@
 # A generic n-ary tree, You can add childs, remove a node and it's child,
 # and get some properties such as level, type(node, leaf).
 class Task < ActiveRecord::Base
+  SUBCLASS_CLASSES = { 'simpletask' => SimpleTask }
 
   #
   # Remove recursively all the childs.
@@ -13,19 +14,19 @@ class Task < ActiveRecord::Base
         event_id = :event_id
         AND left_tree >= :left_tree
         AND right_tree <= :right_tree """,
-        { event_id: event_id, left_tree: left_tree, right_tree: right_tree } )
+        { event_id: self.event_id, left_tree: self.left_tree, right_tree: self.right_tree } )
       childs_and_me.delete_all
 
       # Update tree
       right_part = Task.where("""
         event_id = :event_id
         AND right_tree >= :left_tree """,
-        { event_id: event_id, left_tree: left_tree } )
+        { event_id: self.event_id, left_tree: self.left_tree } )
       left_part = Task.where("""
         event_id = :event_id
         AND left_tree > :left_tree """, { event_id: event_id, left_tree: left_tree } )
 
-      offset = right_tree - left_tree + 1
+      offset = self.right_tree - self.left_tree + 1
       right_part.update_all(["right_tree = right_tree - :offset", { offset: offset } ])
       left_part.update_all(["left_tree = left_tree - :offset", { offset: offset } ])
     end
@@ -44,11 +45,15 @@ class Task < ActiveRecord::Base
   end
 
   def subclass?
-    false
+    not self.subclass.nil?
   end
 
   def subclass
-    @task_subclass ||= SimpleTask.where("task_id = :task_id", { task_id: self.id }).first or nil
+    return nil if self.subclass_name.nil?
+    if not Task::SUBCLASS_CLASSES.has_key? self.subclass_name
+      raise "Subclass " + self.subclass_name + " not allowed"
+    end
+    @task_subclass || Task::SUBCLASS_CLASSES[self.subclass_name].where("task_id = :task_id", { task_id: self.id }).first or nil
   end
 
   #
