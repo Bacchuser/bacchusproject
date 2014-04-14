@@ -67,7 +67,7 @@
 
   .col-lg-8
     - if @task
-      = subclass_partial(@task)
+      = subclass_partial('admin', @task)
     - else
       .alert.alert-info.text-center
         p Vous n'avez pas de tâche pour cet évènement !

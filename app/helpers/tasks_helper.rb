@@ -1,8 +1,8 @@
 module TasksHelper
 
-  def subclass_partial(task)
+  def subclass_partial(prefix, task)
     if task.subclass?
-      render partial: task.class.name.demodulize.downcase
+      render partial: prefix << "_" << task.class.name.demodulize.downcase
     else
       render partial: 'new_task'
     end
