@@ -1,3 +1,6 @@
+/ Administration of a new simpletask task
+/ ====
+
 .well = form_for "subtask", id: @task,
             url: { action: :update_subtask, task_id: @task.task_id },
             html: {:name => 'task'},

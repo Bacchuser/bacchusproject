@@ -1,3 +1,7 @@
+/ Administration of a task, wich we don't know the subtype
+/ (ex:  simple task, task list)
+/ ====
+
 .well = form_for @task , url: { action: :update_subtask, task_id: @task.id }, method: :post do |form|
   .form-vertical
     .row.form-group
@@ -10,6 +14,7 @@
       = form.label "* Type",
         :class => ["control-label",  "col-lg-2"]
       .col-lg-10
+        / TODO use I18n to generate the select field.
         = select :custom, :type, [ ["option Simple - To do", "simpletask"] ]
     .row.form-group
       = form.label "* Assigné à",

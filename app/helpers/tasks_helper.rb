@@ -4,7 +4,7 @@ module TasksHelper
     if task.subclass?
       render partial: prefix << "_" << task.class.name.demodulize.downcase
     else
-      render partial: 'new_task'
+      render partial: prefix << "_" << 'new_task'
     end
   end
 

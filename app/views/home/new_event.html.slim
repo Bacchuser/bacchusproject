@@ -29,23 +29,24 @@ h1 Create a new event
           = form.label :map,
             :class => ["col-lg-2"]
       .row.form-group
-        = form.label :ville,
+        = form.label :town,
           :class => ["col-lg-2"]
-        = form.text_field :ville,
+        = form.text_field :town,
           :rows => 10,
-          :class => ["col-lg-10", "map-container", "ville"]
+          :class => ["col-lg-10", "map-container", "town"]
       .row.form-group
-        = form.label :rue,
+        = form.label :street,
           :class => ["col-lg-2"]
-        = form.text_field :rue,
+        = form.text_field :street,
           :rows => 10,
-          :class => ["col-lg-10",  "map-container", "rue"]
+          :class => ["col-lg-10",  "map-container", "street"]
       .row.form-group
-        = form.label :pays,
+        = form.label :country,
           :class => ["col-lg-2"]
-        = form.text_field :pays,
+        = form.text_field :country,
           :rows => 10,
-          :class => ["col-lg-10",  "map-container", "pays"]
+          :class => ["col-lg-10",  "map-container", "country"]
+
       .row.form-group
         a.btn.btn-sm.btn-info.geo-refresh.col-lg-5.col-lg-offset-4 href="#you-need-javascript" Refresh Map
       .row.form-group

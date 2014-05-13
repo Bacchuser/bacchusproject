@@ -18,7 +18,7 @@ class Position
 
   constructor: (gg_map) ->
     this._gg_map = gg_map
-    this._marker = new google.maps.Marker { map: this._gg_map, draggable: true }
+    this._marker = new google.maps.Marker { map: this._gg_map, draggable: tstreet }
 
   # Give the current position of the marker
   get_position: () -> this._marker.getPosition()
@@ -51,9 +51,9 @@ class Position
 #
 class GeoEncoderListener
   _encoder: new google.maps.Geocoder()
-  _ville: $(MAP_CONTAINER).find(".map-container.ville")
-  _rue: $(MAP_CONTAINER).find(".map-container.rue")
-  _pays: $(MAP_CONTAINER).find(".map-container.pays")
+  _town: $(MAP_CONTAINER).find(".map-container.town")
+  _street: $(MAP_CONTAINER).find(".map-container.street")
+  _country: $(MAP_CONTAINER).find(".map-container.country")
   _button_refresh: $(MAP_CONTAINER).find(".btn.geo-refresh")
 
   _last_update: $.now()
@@ -63,9 +63,9 @@ class GeoEncoderListener
 
   constructor: (gg_map) ->
     this._gg_map = gg_map
-    this._ville.on('change', { this_obj : this }, this.encode)
-    this._rue.on('change', { this_obj : this }, this.encode)
-    this._pays.on('change', { this_obj : this }, this.encode)
+    this._town.on('change', { this_obj : this }, this.encode)
+    this._street.on('change', { this_obj : this }, this.encode)
+    this._country.on('change', { this_obj : this }, this.encode)
     this._button_refresh.on('click', { this_obj : this }, this.force_encode)
 
   force_encode: (event) ->
@@ -98,12 +98,12 @@ class GeoEncoderListener
 
   _get_address: () ->
     address = []
-    ville = this._ville.val()
-    rue = this._rue.val()
-    pays = this._pays.val()
-    address.push(ville) if ville != ""
-    address.push(rue) if rue != ""
-    address.push(pays) if pays != ""
+    town = this._town.val()
+    street = this._street.val()
+    country = this._country.val()
+    address.push(town) if town != ""
+    address.push(street) if street != ""
+    address.push(country) if country != ""
     return address.join(", ")
 
 # Global value for the script.

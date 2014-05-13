@@ -36,7 +36,7 @@ class Task < ActiveRecord::Base
     last_created = Task.where("event_id = :event_id ", { event_id: parent_task.event_id } )
     new_task = parent_task.new_child
     new_task.is_visible = false
-    new_task.label = "New task #" + (last_created.count + 1).to_s
+    new_task.label = "New task #" + last_created.count.to_s
     return new_task
   end
 
