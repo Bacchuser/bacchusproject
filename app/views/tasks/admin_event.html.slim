@@ -61,7 +61,13 @@
 
         .list-group.clearfix
           - @tasks.each do |task|
-            = link_to task.label, {action: :admin_event, task_id: task.id}, { class: navigation_class(task)}
+            a.list-group-item href ="#{url_for  action: :admin_event, task_id: task.id}"
+              - if status(task) == 'new'
+                i.glyphicon.glyphicon-fire
+              - else
+                i.glyphicon.glyphicon-floppy-saved
+              span = " " << task.label
+
 
   .col-lg-8
     - if @task

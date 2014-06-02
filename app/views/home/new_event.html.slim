@@ -65,14 +65,14 @@ h1 Create a new event
     .row.form-group
       = form.label :start_at,
         class: ["col-lg-2"]
-      = form.date_field :start_at,
-        class: ["col-lg-10"]
+      = form.text_field :start_at,
+        class: ["col-lg-10", "js-datepicker", "js-before-calendar"]
 
     .row.form-group
       = form.label :end_at,
         class: ["col-lg-2"]
-      = form.date_field :end_at,
-        class: ["col-lg-10"]
+      = form.text_field :end_at,
+        class: ["col-lg-10", "js-datepicker", "js-after-calendar"]
 
     .row.form-group
       .col-lg-12
