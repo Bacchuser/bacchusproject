@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  event_id: 1
+  tree_level: 1
+  left_tree: 1
+  right_tree: 1
+
+two:
+  event_id: 1
+  tree_level: 1
+  left_tree: 1
+  right_tree: 1

@@ -4,14 +4,18 @@ module TasksHelper
     if task.subclass?
       render partial: prefix << "_" << task.class.name.demodulize.downcase
     else
-      render partial: 'new_task'
+      render partial: prefix << "_" << 'new_task'
     end
+  end
+
+  def status(task)
+    return "new" if task.new?
+    return "active" if not @task.nil? and ((@task.new? and task.id == @task.id) or (not @task.new? and task.id == @task.task_id))
   end
 
   def navigation_class(task)
     classes = ["list-group-item"]
-    classes << "new" if task.new?
-    classes << "active" if not @task.nil? and ((@task.new? and task.id == @task.id) or (not @task.new? and task.id == @task.task_id))
+    classes << status(task)
     return classes
   end
 end

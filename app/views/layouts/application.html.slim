@@ -13,16 +13,27 @@ html
 
     / STYLESHEETS
     link rel="icon" type="image/png" href="/favicon.png"
+<<<<<<< HEAD
     =stylesheet_link_tag "bootswatch.css", :media => "all"
     =stylesheet_link_tag "bootstrap-responsive.min", :media => "all"
     =stylesheet_link_tag "home", :media => "all", "data-turbolinks-track" => true
     =stylesheet_link_tag "tasks", :media => "all", "data-turbolinks-track" => true
+=======
+    =stylesheet_link_tag "bootstrap.min", media: "all"
+    =stylesheet_link_tag "bootstrap-responsive.min", media: "all"
+    =stylesheet_link_tag "home", media: "all", "data-turbolinks-trac" => true
+    =stylesheet_link_tag "tasks", media: "all", "data-turbolinks-trac" => true
+    =stylesheet_link_tag "bootswatch.min", media: "all"
+    =stylesheet_link_tag "jquery-ui-1.10.4.min", media: "all"
+>>>>>>> FETCH_HEAD
 
     / JAVASCRIPT
     script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=#{GGMap_key()}&sensor=true"
     =javascript_include_tag "jquery.min"
     =javascript_include_tag "bootstrap.min"
     =javascript_include_tag "html5shiv-printshiv.min"
+    =javascript_include_tag "jquery-ui-1.10.4.min"
+    =javascript_include_tag "home"
 
     </script>
     / To avoid embedding in Iframe
@@ -81,8 +92,8 @@ html
         .col-lg-2
           .row.page-header
             .btn-group-vertical
-              = link_to "Home", {:controller => '/home', :action=>:main}, :class => ["btn", "btn-default"]
-              = link_to "Create Event", {:controller => '/home', :action=>:new_event}, :class => ["btn", "btn-default"]
+              = link_to "Home", {controller: '/home', :action=>:main}, class: ["btn", "btn-default"]
+              = link_to "Create Event", {controller: '/home', :action=>:new_event}, class: ["btn", "btn-default"]
               .btn.btn-default Navigation 3
               .btn.btn-default Navigation 4
         .col-lg-10

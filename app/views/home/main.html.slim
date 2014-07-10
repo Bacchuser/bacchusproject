@@ -6,8 +6,8 @@
     /! New event button
     / =====================
     .col-lg-3.dashboard-elem.text-center
-      = link_to "Créer un évènement", {:action => :new_event},
-        :class => ["btn",  "btn-primary", "btn-sm"], :style => "margin : 100px 0;"
+      = link_to "Créer un évènement", { action: :new_event },
+        class: ["btn",  "btn-primary", "btn-sm"], style: "margin : 100px 0;"
 
     /! List of my events
     / =====================
@@ -27,7 +27,7 @@
             .row.text-center
               .btn-group.btn-group-vertical
                 btn.btn-info.btn-sm ADMINISTRATEUR
-                = link_to "GERER", {:controller => :tasks, :action => :admin_event, :id => my_event.task.id}, {:class => ["btn","btn-default","btn-sm"]}
+                = link_to "GERER", {controller: :tasks, action: :admin_event, id: my_event.task.id}, {class: ["btn","btn-default","btn-sm"]}
 
     / TODO List of events I have subscribe
     / TODO Invitations of events

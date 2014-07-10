@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  cake_plan_user_id: 1
+  admin_task_id: 1
+
+two:
+  cake_plan_user_id: 1
+  admin_task_id: 1

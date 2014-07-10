@@ -1,26 +1,31 @@
+/ Administration of a general task. Is include by all the sublcasses templates.
+/ (ex:  simple task, task list need to load this template to manage the "core" of the task.)
+/ ====
+
 .well = form_for @task , url: { action: :update_subtask, task_id: @task.id }, method: :post do |form|
   .form-vertical
     .row.form-group
       = form.label "* Titre",
-        :class => ["control-label",  "col-lg-2"]
+        class: ["control-label",  "col-lg-2"]
       = form.text_field :label,
-        :placeholder => "Titre",
-        :autofocus => true, :class => "col-lg-10"
+        placeholder: "Titre",
+        autofocus: true, class: "col-lg-10"
     .row.form-group
       = form.label "* Type",
-        :class => ["control-label",  "col-lg-2"]
+        class: ["control-label",  "col-lg-2"]
       .col-lg-10
+        / TODO use I18n to generate the select field.
         = select :custom, :type, [ ["option Simple - To do", "simpletask"] ]
     .row.form-group
       = form.label "* Assigné à",
-        :class => ["control-label",  "col-lg-2"]
+        class: ["control-label",  "col-lg-2"]
       input type="text" class = ["control-label",  "col-lg-10"] placeholder = "Assigné à "
 
     .row.form-group
       .btn-group.btn-group-horizontal.col-lg-offset-2.col-lg-12
         = form.button "Annuler",
-          :class => ["control-label", "btn", "btn-danger", "btn-sm"],
-          :name => "save_status", :value => "cancel"
+          class: ["control-label", "btn", "btn-danger", "btn-sm"],
+          name: "save_status", value: "cancel"
         = form.button "Sauver et Continuer ",
-          :class => ["control-label", "btn", "btn-success", "btn-sm"],
-          :name => "save_status", :value => "create"
+          class: ["control-label", "btn", "btn-success", "btn-sm"],
+          name: "save_status", value: "create"

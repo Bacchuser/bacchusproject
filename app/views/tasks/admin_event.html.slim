@@ -44,7 +44,7 @@
         .row.page-header
           .col-lg-1
           .col-lg-6
-            = link_to "+ Tâche", {:action => :new_task}, { :class => ["btn", "btn-success", "inline" ] }
+            = link_to "+ Tâche", {action: :new_task}, { class: ["btn", "btn-success", "inline" ] }
           .col-lg-3
             .btn-group
               button.btn.btn-default.dropdown-toggle data-toggle = :dropdown
@@ -61,8 +61,12 @@
 
         .list-group.clearfix
           - @tasks.each do |task|
-            = link_to task.label, {:action => :admin_event, :task_id => task.id}, { :class => navigation_class(task)}
-
+            a.list-group-item href ="#{url_for  action: :admin_event, task_id: task.id}"
+              - if status(task) == 'new'
+                i.glyphicon.glyphicon-fire
+              - else
+                i.glyphicon.glyphicon-floppy-saved
+              span = " " << task.label
 
 
   .col-lg-8
@@ -72,5 +76,5 @@
       .alert.alert-info.text-center
         p Vous n'avez pas de tâche pour cet évènement !
         p Créer une nouvelle tâche :
-        = link_to "+ Tâche", {:action => 'new_task'}, { :class => ["btn", "btn-success", "inline" ] }
+        = link_to "+ Tâche", {action: 'new_task'}, { class: ["btn", "btn-success", "inline" ] }
 

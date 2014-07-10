@@ -1,7 +1,7 @@
 / All user, even not registred can create an event
 h1 Create a new event
 
-= form_for :new_task, :url => {:action=>'create_event'} do |form|
+= form_for :new_task, url: {:action=>'create_event'} do |form|
   - if errors
     .alert.alert-danger
       h3 We can not save your event :(
@@ -13,39 +13,40 @@ h1 Create a new event
   .form-vertical
     .row.form-group
       = form.label :label,
-        :class => ["col-lg-2"]
+        class: ["col-lg-2"]
       = form.text_field :label,
-        :autofocus => true, :class => ["col-lg-10", "input-sm"]
+        autofocus: true, class: ["col-lg-10", "input-sm"]
 
     .row.form-group
       = form.label :description,
-        :class => ["col-lg-2"]
+        class: ["col-lg-2"]
       = form.text_area :description,
-        :rows => 10,
-        :class => ["col-lg-10"]
+        rows: 10,
+        class: ["col-lg-10"]
 
     #map-container.row
       .row.form-group
           = form.label :map,
-            :class => ["col-lg-2"]
+            class: ["col-lg-2"]
       .row.form-group
-        = form.label :ville,
-          :class => ["col-lg-2"]
-        = form.text_field :ville,
-          :rows => 10,
-          :class => ["col-lg-10", "map-container", "ville"]
+        = form.label :town,
+          class: ["col-lg-2"]
+        = form.text_field :town,
+          rows: 10,
+          class: ["col-lg-10", "map-container", "town"]
       .row.form-group
-        = form.label :rue,
-          :class => ["col-lg-2"]
-        = form.text_field :rue,
-          :rows => 10,
-          :class => ["col-lg-10",  "map-container", "rue"]
+        = form.label :street,
+          class: ["col-lg-2"]
+        = form.text_field :street,
+          rows: 10,
+          class: ["col-lg-10",  "map-container", "street"]
       .row.form-group
-        = form.label :pays,
-          :class => ["col-lg-2"]
-        = form.text_field :pays,
-          :rows => 10,
-          :class => ["col-lg-10",  "map-container", "pays"]
+        = form.label :country,
+          class: ["col-lg-2"]
+        = form.text_field :country,
+          rows: 10,
+          class: ["col-lg-10",  "map-container", "country"]
+
       .row.form-group
         a.btn.btn-sm.btn-info.geo-refresh.col-lg-5.col-lg-offset-4 href="#you-need-javascript" Refresh Map
       .row.form-group
@@ -53,25 +54,25 @@ h1 Create a new event
 
       .row.form-group
         = form.label :latitude,
-          :class => ["col-lg-2", "col-lg-offset-2"]
+          class: ["col-lg-2", "col-lg-offset-2"]
         = form.text_field :latitude,
-          :class => ["col-lg-3", "map-container", "lat"]
+          class: ["col-lg-3", "map-container", "lat"]
         = form.label :longitude,
-          :class => ["col-lg-2"]
+          class: ["col-lg-2"]
         = form.text_field :longitude,
-          :class => ["col-lg-3", "map-container", "lng"]
+          class: ["col-lg-3", "map-container", "lng"]
 
     .row.form-group
       = form.label :start_at,
-        :class => ["col-lg-2"]
-      = form.date_field :start_at,
-        :class => ["col-lg-10"]
+        class: ["col-lg-2"]
+      = form.text_field :start_at,
+        class: ["col-lg-10", "js-datepicker", "js-before-calendar"]
 
     .row.form-group
       = form.label :end_at,
-        :class => ["col-lg-2"]
-      = form.date_field :end_at,
-        :class => ["col-lg-10"]
+        class: ["col-lg-2"]
+      = form.text_field :end_at,
+        class: ["col-lg-10", "js-datepicker", "js-after-calendar"]
 
     .row.form-group
       .col-lg-12
@@ -84,6 +85,6 @@ h1 Create a new event
         = form.label :is_public
 
     .row.actions
-      = form.submit 'Save', :class => ["btn", "btn-success", "btn-lg", "col-lg-3", "col-lg-offset-5"]
+      = form.submit 'Save', class: ["btn", "btn-success", "btn-lg", "col-lg-3", "col-lg-offset-5"]
 
   br

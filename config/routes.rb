@@ -36,7 +36,6 @@ Bacchus::Application.routes.draw do
   resources :tasks,
     :except => [:show, :new, :edit, :create, :update, :destroy],
     :constraints => { :id => /\d.*/ } do
-
     member do
       # We display the event, with eventually a subtask to display.
       get 'admin_event(/:task_id)', :action => :admin_event, :as => :admin_event
