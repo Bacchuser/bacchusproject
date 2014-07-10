@@ -1,38 +1,35 @@
-/ Administration of a new simpletask task
-/ ====
-
 .well = form_for "subtask", id: @task,
             url: { action: :update_subtask, task_id: @task.task_id },
-            html: {name: 'task'},
+            html: {:name => 'task'},
             method: :post do |form|
   h3 Simple Task "#{@task.label}"
   .form-vertical
     = render "tasks/task", form: form
     .row.form-group
       = form.label :start_at,
-        class: ["control-label",  "col-lg-2"]
+        :class => ["control-label",  "col-lg-2"]
       = form.text_field :start_at,
-        class: "col-lg-10",
-        value: @task.start_at,
-        placeholder: "dd/mm/YYYY"
+        :class => "col-lg-10",
+        :value => @task.start_at,
+        :placeholder => "dd/mm/YYYY"
     .row.form-group
       = form.label :end_at,
-        class: ["control-label",  "col-lg-2"]
+        :class => ["control-label",  "col-lg-2"]
       = form.text_field :end_at,
-        class: "col-lg-10",
-        placeholder: "dd/mm/YYYY"
+        :class => "col-lg-10",
+        :placeholder => "dd/mm/YYYY"
     .row.form-group
       = form.label :alert_at,
-        class: ["control-label",  "col-lg-2"]
+        :class => ["control-label",  "col-lg-2"]
       = form.text_field :alert_at,
-        class: "col-lg-10",
-        placeholder: "dd/mm/YYYY"
+        :class => "col-lg-10",
+        :placeholder => "dd/mm/YYYY"
     .row.form-group
       .btn-group.btn-group-horizontal.col-lg-offset-2.col-lg-12
         = form.button "Cancel",
-          class: ["control-label", "btn", "btn-danger", "btn-sm"],
-          name: "save_status", value: "cancel",
-          tabindex: -1
+          :class => ["control-label", "btn", "btn-danger", "btn-sm"],
+          :name => "save_status", :value => "cancel",
+          :tabindex => -1
         = form.button "Save and Publish",
-          class: ["control-label", "btn", "btn-success", "btn-sm"],
-          name: "save_status", value: "save"
+          :class => ["control-label", "btn", "btn-success", "btn-sm"],
+          :name => "save_status", :value => "save"

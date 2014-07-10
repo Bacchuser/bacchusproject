@@ -15,12 +15,6 @@ class EventPresenter < Presenter
                               :description=, :is_public=, :id, :start_at, :start_at=,
                               :end_at, :end_at=
 
-
-  def_delegators :localisation,
-                 :latitude, :longitude, :town, :zip, :street, :country, :comments,
-                 :latitude=, :longitude=, :town=, :zip=, :street=, :country=, :comments=
-
-
   def_delegators :admin_user
 
   include ActiveModel::Validations
@@ -42,14 +36,13 @@ class EventPresenter < Presenter
   # Get the user linked
   def admin_user; @admin_user ||= UserAdmin.new end
 
-  def localisation; @localisation ||= Localisation.new end
-
   def admin
     if admin_user.nil?
       raise "user is null !"
     end
     admin_user.cake_plan_user
   end
+
   #
   # Get all the task where the user given is an administrator.
   #
@@ -76,9 +69,8 @@ class EventPresenter < Presenter
 
     # From the role, we can find the Event task associate,
     # and the particular data of the subclass.
-    presenter.event = Event.where(task_id:  role.task_role).limit(1).first
+    presenter.event = Event.where("task_id = :task_id", { task_id: role.task.id } ).limit(1).first
     presenter.admin_user = role.user_role
-    presenter.localisation = Localisation.find(presenter.event.localisation_id)
     return presenter
   end
 
@@ -94,7 +86,6 @@ class EventPresenter < Presenter
     Task.transaction do
       task.save!
       event.save!
-      localisation.save!
       log_dependencies
     end
   end
@@ -114,9 +105,7 @@ class EventPresenter < Presenter
       event.save!
       task.root_for_event! (event)
       task.save!
-      localisation.save!
       event.task = task
-      event.localisation = localisation
       event.save!
 
       # Assign the admin roles to the creator
@@ -138,11 +127,6 @@ class EventPresenter < Presenter
     @admin_user = new_admin_user
   end
 
-  # Set the localisation of the task
-  def localisation=(new_localisation)
-    @localisation = new_localisation
-  end
-
   private
   def log_dependencies
       Rails.logger.info "--------- log_dependencies"
@@ -151,8 +135,6 @@ class EventPresenter < Presenter
       Rails.logger.info task.inspect
       Rails.logger.info "event"
       Rails.logger.info event.inspect
-      Rails.logger.info "localisation"
-      Rails.logger.info localisation.inspect
       Rails.logger.info "user_admin"
       Rails.logger.info admin_user.inspect
       Rails.logger.info "--------- /log_dependencies"

@@ -1,15 +1,12 @@
-/ A new task just have been saved, and have no subtask.
-/ =====
-
 .row.form-group
   = form.label :label,
     class: ["control-label",  "col-lg-2"]
   = form.text_field :label,
     placeholder: "Titre",
     autofocus: true, class: ["col-lg-10"],
-    name: "task[label]",
-    value: @task.label
+    :name => "task[label]",
+    :value => @task.label
 .row.form-group
   = form.label "* Assigné à",
-    class: ["control-label",  "col-lg-2"]
+    :class => ["control-label",  "col-lg-2"]
   input type="text" class = ["control-label",  "col-lg-10"] placeholder = "Assigné à "
