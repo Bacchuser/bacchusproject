@@ -13,7 +13,7 @@ html
 
     / STYLESHEETS
     link rel="icon" type="image/png" href="/favicon.png"
-    =stylesheet_link_tag "bootswatch.min", :media => "all"
+    =stylesheet_link_tag "bootswatch.css", :media => "all"
     =stylesheet_link_tag "bootstrap-responsive.min", :media => "all"
     =stylesheet_link_tag "home", :media => "all", "data-turbolinks-track" => true
     =stylesheet_link_tag "tasks", :media => "all", "data-turbolinks-track" => true
@@ -28,7 +28,47 @@ html
     / To avoid embedding in Iframe
     = csrf_meta_tags
   body
-    .container role="main"
+  
+	<div class="navbar navbar-default">
+	  <div class="navbar-header">
+	    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+	      <span class="icon-bar"></span>
+	      <span class="icon-bar"></span>
+	      <span class="icon-bar"></span>
+	    </button>
+	    <a class="navbar-brand" href="#">Elza</a>
+	  </div>
+	  <div class="navbar-collapse collapse navbar-responsive-collapse">
+	    <ul class="nav navbar-nav">
+	      <li class="active"><a href="#">Messages <span class="badge">2</span> </a> </li>
+	      <li><a href="#">Contacts </a></li>
+	      <li class="dropdown">
+	        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Evénements <span class="badge">3</span> <b class="caret"></b></a>
+	        <ul class="dropdown-menu">
+	          <li><a href="#">Evénement 1</a></li>
+	          <li><a href="#">Evénement 2</a></li>
+	          <li><a href="#">Evénement 3</a></li>
+	          <li class="divider"></li>
+	          <li><a href="#">Créér un nouvel événement</a></li>
+	        </ul>
+	      </li>
+	    </ul>
+	    <ul class="nav navbar-nav navbar-right">
+	      <li><a href="#">Aide</a></li>
+	      <li class="dropdown">
+	        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Préférences <b class="caret"></b></a>
+	        <ul class="dropdown-menu">
+	          <li><a href="#">Profil</a></li>
+	          <li><a href="#">Contacts</a></li>
+	          <li class="divider"></li>
+	          <li><a href="#">Déconnexion</a></li>
+	        </ul>
+	      </li>
+	    </ul>
+	  </div>
+	</div>
+  
+    .container role="main"    
       - if notice or alert
         .row
         - if notice
@@ -37,7 +77,6 @@ html
         - if alert
           .website_message.alert.col-lg-10.col-lg-offset-2
             .alert.alert-dismissable.alert-danger = alert
-
       .row
         .col-lg-2
           .row.page-header
@@ -49,11 +88,25 @@ html
         .col-lg-10
           == yield
 
-      footer role="footer"
-        .row
-          .col-lg-10.col-lg-offset-2.well.well-sm
-            Copyright &copy; #{@year} Bacchus Project
 
+	<div class="navbar navbar-fixed-bottom">
+	  <div class="navbar-footer">
+	    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+	      <span class="icon-bar"></span>
+	      <span class="icon-bar"></span>
+	      <span class="icon-bar"></span>
+	    </button>
+	  </div>
+	  <div class="navbar-collapse collapse navbar-responsive-collapse">	  
+	    <ul class="nav navbar-nav navbar-right">
+	      <li><a href="#">Une Question?</a></li>
+	    </ul>
+	  </div>
+	  footer role="footer"
+	  	span
+          .credits-footer
+            Copyright &copy; #{@year} Bacchus Project | ISO 9001 fils! 
+	</div>
 
         =javascript_include_tag "tasks"
 

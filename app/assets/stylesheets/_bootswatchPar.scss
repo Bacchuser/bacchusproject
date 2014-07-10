@@ -1,0 +1,174 @@
+// Cosmo 3.1.1
+// Bootswatch
+// -----------------------------------------------------
+@import 'variables';
+@import url("//fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700");
+
+// Navbar =====================================================================
+
+.navbar-inverse {
+
+  .badge {
+    background-color: $brand-white;
+    color: $brand-black-light;
+  }
+}
+
+// Buttons ====================================================================
+
+.btn-lg {
+  padding-top: 19px;
+}
+
+// Typography =================================================================
+
+.text-primary,
+.text-primary:hover {
+  color: $brand-black-light;
+}
+
+.text-success,
+.text-success:hover {
+  color: $brand-red-light;
+}
+
+.text-danger,
+.text-danger:hover {
+  color: $brand-blue-light;
+}
+
+.text-warning,
+.text-warning:hover {
+  color: $brand-green-light;
+}
+
+.text-info,
+.text-info:hover {
+  color: $brand-yellow-light;
+}
+
+// Tables =====================================================================
+
+table,
+.table {
+
+  a {
+    text-decoration: underline;
+  }
+
+  .success,
+  .warning,
+  .danger,
+  .info {
+    color: $brand-white;
+
+    a {
+      color: $brand-white;
+    }
+  }
+}
+
+// Forms ======================================================================
+
+
+.has-warning {
+  .help-block,
+  .control-label,
+  .form-control-feedback {
+    color: $brand-green-light;
+  }
+
+  .form-control,
+  .form-control:focus {
+    border: 1px solid $brand-green-light;
+  }
+}
+
+.has-error {
+  .help-block,
+  .control-label,
+  .form-control-feedback {
+    color: $brand-blue-light;
+  }
+
+  .form-control,
+  .form-control:focus {
+    border: 1px solid $brand-blue-light;
+  }
+}
+
+.has-success {
+  .help-block,
+  .control-label,
+  .form-control-feedback {
+    color: $brand-red-light;
+  }
+
+  .form-control,
+  .form-control:focus {
+    border: 1px solid $brand-red-light;
+  }
+}
+
+// Navs =======================================================================
+
+.nav-pills {
+
+  & > li > a {
+    border-radius: 0;
+  }
+}
+
+.dropdown-menu {
+
+  & > li > a:hover,
+  & > li > a:focus {
+    background-image: none;
+  }
+}
+
+// Indicators =================================================================
+
+.alert {
+  border: none;
+
+  .alert-link {
+    text-decoration: underline;
+    color: $brand-white;
+  }
+
+  .close {
+    color: $brand-white;
+    text-decoration: none;
+    opacity: 0.4;
+
+    &:hover,
+    &:focus {
+      color: $brand-white;
+      opacity: 1;
+    }
+  }
+}
+
+.label {
+  border-radius: 0;
+}
+
+// Progress bars ==============================================================
+
+.progress {
+  height: 8px;
+  //@include box-shadow(none);
+  .progress-bar {
+    font-size: 8px;
+    line-height: 8px;
+  }
+}
+
+// Containers =================================================================
+
+.panel-heading,
+.panel-footer {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
