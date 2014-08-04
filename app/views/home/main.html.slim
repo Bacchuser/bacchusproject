@@ -1,17 +1,13 @@
 
 - if cake_plan_user_signed_in?
-    .page-header
-      h1 Dashboard
-	h5 Hello 
-    /! New event button
-    / =====================
-    .col-lg-3.dashboard-elem.text-center
-      = link_to "Créer un évènement", {:action => :new_event},
-        :class => ["btn",  "btn-primary", "btn-sm"], :style => "margin : 100px 0;"
 
     /! List of my events
     / =====================
     - if not @events_to_admin.nil? and @events_to_admin.count > 0
+      .page-header
+        h1 Bonjour!
+        h4 Allez au boulot!
+        
         - for my_event in @events_to_admin
           .my_event.desc.col-lg-3.dashboard-elem
             strong.text-center
@@ -34,9 +30,15 @@
     / List of public events that I have not subscribe
 
     - else
-      .row
-        .col-lg-6.col-lg-offset-3
-          .alert.alert-info You don't have any event !
+      .page-header
+        h1 Zut!
+        h4 Vous n'avez pas d'évènement :(
+        
+    /! New event button
+    / =====================
+    .col-lg-0.dashboard-elem.text-center
+      = link_to "Créez un évènement", {:action => :new_event},
+        :class => ["btn-lg",  "btn-primary"], :style => "margin : 100px 0;"
 
 - else
     h1 Hello Visitor !

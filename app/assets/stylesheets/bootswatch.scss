@@ -2140,7 +2140,7 @@ textarea.input-lg {
     cursor:pointer;
     background-image:none;
     border:1px solid transparent;
-    border-radius:4px;
+    border-radius:6px;
     -webkit-user-select:none;
     -moz-user-select:none;
     -ms-user-select:none;
@@ -2197,15 +2197,15 @@ textarea.input-lg {
 }
 
 .btn-primary {
-    color:$brand-white;
+    color:$gray-dark;
     background-color:$brand-blue-light;
     border-color:$brand-blue-light
 }
 
 .btn-primary:hover,.btn-primary:focus,.btn-primary:active,.btn-primary.active,.open .dropdown-toggle.btn-primary {
-    color:$brand-white;
-    background-color:#3276b1;
-    border-color:$brand-blue-dark
+    color:$gray-dark;
+    background-color:$brand-blue-lighter;
+    border-color:$brand-blue-light
 }
 
 .btn-primary:active,.btn-primary.active,.open .dropdown-toggle.btn-primary {
@@ -2330,10 +2330,10 @@ textarea.input-lg {
 }
 
 .btn-lg {
-    padding:14px 16px;
+    padding:24px 26px;
     font-size:22px;
     line-height:1.33;
-    border-radius:6px
+    border-radius:2px
 }
 
 .btn-sm,.btn-xs {
@@ -6043,10 +6043,7 @@ th.visible-print,td.visible-print {
 }
 
 .btn-default,.btn-default:hover {
-    background-image:-webkit-gradient(linear,0 0,0 100%,from($gray),color-stop(6%,$gray-dark),to($brand-black-light));
-    background-image:-webkit-linear-gradient($gray,$gray-dark 6%,$brand-black-light);
-    background-image:-moz-linear-gradient(top,$gray,$gray-dark 6%,$brand-black-light);
-    background-image:linear-gradient($gray,$gray-dark 6%,$brand-black-light);
+    background-image:$gray;
     background-repeat:no-repeat;
     border:1px solid $brand-black-dark;
     filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff4d4d4d',endColorstr='#ff292929',GradientType=0);
@@ -6054,10 +6051,7 @@ th.visible-print,td.visible-print {
 }
 
 .btn-primary,.btn-primary:hover {
-    background-image:-webkit-gradient(linear,0 0,0 100%,from($brand-blue-light),color-stop(6%,$brand-blue-light),to($brand-blue-dark));
-    background-image:-webkit-linear-gradient($brand-blue-light,$brand-blue-light 6%,$brand-blue-dark);
-    background-image:-moz-linear-gradient(top,$brand-blue-light,$brand-blue-light 6%,$brand-blue-dark);
-    background-image:linear-gradient($brand-blue-light,$brand-blue-light 6%,$brand-blue-dark);
+    background-image:$brand-blue-light;
     background-repeat:no-repeat;
     border:1px solid $brand-blue-dark;
     filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff6aa3d5',endColorstr='#ff3681c1',GradientType=0);
@@ -6065,10 +6059,7 @@ th.visible-print,td.visible-print {
 }
 
 .btn-success,.btn-success:hover {
-    background-image:-webkit-gradient(linear,0 0,0 100%,from($brand-green-light),color-stop(6%,$brand-green-dark),to($brand-green-dark));
-    background-image:-webkit-linear-gradient($brand-green-light,$brand-green-dark 6%,$brand-green-dark);
-    background-image:-moz-linear-gradient(top,$brand-green-light,$brand-green-dark 6%,$brand-green-dark);
-    background-image:linear-gradient($brand-green-light,$brand-green-dark 6%,$brand-green-dark);
+    background-image:$brand-green-light;
     background-repeat:no-repeat;
     border:1px solid $brand-green-dark;
     filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff80c780',endColorstr='#ff4eb24e',GradientType=0);
@@ -6076,10 +6067,7 @@ th.visible-print,td.visible-print {
 }
 
 .btn-info,.btn-info:hover {
-    background-image:-webkit-gradient(linear,0 0,0 100%,from($brand-blue-lighter),color-stop(6%,$brand-blue-light),to($brand-blue-light));
-    background-image:-webkit-linear-gradient($brand-blue-lighter,$brand-blue-light 6%,$brand-blue-light);
-    background-image:-moz-linear-gradient(top,$brand-blue-lighter,$brand-blue-light 6%,$brand-blue-light);
-    background-image:linear-gradient($brand-blue-lighter,$brand-blue-light 6%,$brand-blue-light);
+    background-image:$brand-blue-light;
     background-repeat:no-repeat;
     border:1px solid $brand-blue-light;
     filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff85d0e7',endColorstr='#ff4ab9db',GradientType=0);

@@ -43,11 +43,11 @@ html
 	      <li class="active"><a href="#">Messages <span class="badge">2</span> </a> </li>
 	      <li><a href="#">Contacts </a></li>
 	      <li class="dropdown">
-	        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Evénements <span class="badge">3</span> <b class="caret"></b></a>
+	        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Evènements <span class="badge">3</span> <b class="caret"></b></a>
 	        <ul class="dropdown-menu">
-	          <li><a href="#">Evénement 1</a></li>
-	          <li><a href="#">Evénement 2</a></li>
-	          <li><a href="#">Evénement 3</a></li>
+	          <li><a href="#">Evènement 1</a></li>
+	          <li><a href="#">Evènement 2</a></li>
+	          <li><a href="#">Evènement 3</a></li>
 	          <li class="divider"></li>
 	          <li><a href="#">Créér un nouvel événement</a></li>
 	        </ul>
@@ -80,7 +80,7 @@ html
       .row
         .col-lg-2
           .row.page-header
-            .btn-group-vertical
+            /.btn-group-vertical
               = link_to "Home", {:controller => '/home', :action=>:main}, :class => ["btn", "btn-default"]
               = link_to "Create Event", {:controller => '/home', :action=>:new_event}, :class => ["btn", "btn-default"]
               .btn.btn-default Navigation 3
@@ -105,7 +105,7 @@ html
 	  footer role="footer"
 	  	span
           .credits-footer
-            Copyright &copy; #{@year} Bacchus Project | ISO 9001 fils! 
+            Copyright &copy; #{@year} Bacchus Project - ISO 9001 fils! 
 	</div>
 
         =javascript_include_tag "tasks"
