@@ -31,22 +31,33 @@
 
     - else
       .page-header
-        h1 Zut!
-        h4 Vous n'avez pas d'évènement :(
+        h1 Bonjour
         
     /! New event button
     / =====================
-    .col-lg-0.dashboard-elem.text-center
-      = link_to "Créez un évènement", {:action => :new_event},
-        :class => ["btn-lg",  "btn-primary"], :style => "margin : 100px 0;"
+    
+    .jumbotron
+      h1 Gottverdammi nomal!
+      p Vous n'avez pas d'évènement :-(  Respirez un grand coup et cliquez là-dessous pour créer le prochain évènement de l'année.
+      p
+        a
+      = link_to "Nouvel évènement", {:action => :new_event},
+        :class => ["btn btn-primary btn-lg"], :style => "margin : 0px 0;"
+      
+      p
+        a
+          = render 'devise/menu/registration_items'
+          = render 'devise/menu/login_items'  
 
 - else
-    h1 Hello Visitor !
-    p You are not logged. Please login to access to your account.
+  .page-header
+    h1 Bienvenue
 
-    .row
-      .col-lg-3.col-lg-offset-1
-        .btn-group.btn-group-justified
-          = render 'devise/menu/login_items'
-          = render 'devise/menu/registration_items'
+  .jumbotron
+    h1 Organisez facilement.
+    p Enregistrez-vous dès maintenant ou connectez-vous pour accéder à votre compte.
+    p.btn-group
+      a 
+        = render 'devise/menu/registration_items'
+        = render 'devise/menu/login_items'
 

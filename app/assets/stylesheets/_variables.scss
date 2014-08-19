@@ -12,6 +12,7 @@ $gray-dark:             lighten(#000, 20%) !default;   	// #333 GRAY-85 MERGED 2
 $gray:                  lighten(#000, 33.5%) !default; 	// #555 GRAY-75 UNUSED (#333)
 $gray-light:            lighten(#000, 60%) !default;   	// #999 GRAY-50 OK
 $gray-lighter:          lighten(#000, 90%) !default; 	// #eee	GRAY-25	OK
+$gray-lightest:         lighten(#000, 98%) !default; 	// #eee	GRAY-25	OK
 
 $brand-white:			#FFF !default;
 
@@ -26,12 +27,16 @@ $brand-yellow-light:    #EBEBBC !default; 				// BASE COLOR
 $brand-yellow-dark:     #D3D3A8 !default;
 
 $brand-green-light:     #BCE3C5 !default; 				// BASE COLOR
-$brand-green-dark:      #A8CBB0 !default;
+$brand-green-dark:      darken(#BCE3C5, 25%) !default;
 $brand-green-darker:    darken(#A8CBB0, 20%) !default;
 
-$brand-blue-lighter:    lighten(#82B3AE, 5%) !default;
-$brand-blue-light:      #82B3AE !default; 				// BASE COLOR
-$brand-blue-dark:       #74A09C !default;
+$brand-blue-lighter:    lighten(#2780E3, 5%) !default;
+$brand-blue-light:      #2780E3 !default; 				// BASE COLOR
+$brand-blue-dark:       darken(#2780E3, 5%) !default;
+
+$brand-aqua-lighter:    lighten(#82B3AE, 5%) !default;
+$brand-aqua-light:      #82B3AE !default; 				// BASE COLOR
+$brand-aqua-dark:       #74A09C !default;
 
 // TO CHANGE - REFLECT -  UNUSED
 //$brand-primary:			#230F2B !default;
@@ -147,9 +152,10 @@ $padding-xs-horizontal:     5px !default;
 $line-height-large:         1.33 !default;
 $line-height-small:         1.5 !default;
 
-$border-radius-base:        0 !default;
-$border-radius-large:       0 !default;
-$border-radius-small:       0 !default;
+$border-radius-small:       0px !default;
+$border-radius-base:        2px !default;
+$border-radius-large:       4px !default;
+$border-radius-xl:          16px !default;
 
 //** Global color for active items (e.g., navs or dropdowns).
 $component-active-color:    $brand-white !default;
@@ -285,7 +291,7 @@ $dropdown-link-disabled-color:   $text-muted !default;
 $dropdown-header-color:          $text-muted !default;
 
 // Note: Deprecated @dropdown-caret-color as of v3.1.0
-$dropdown-caret-color:           #000 !default;
+$dropdown-caret-color:           #fff !default;
 
 
 //-- Z-index master list
@@ -406,7 +412,7 @@ $navbar-default-brand-hover-bg:            none !default;
 // Navbar toggle
 $navbar-default-toggle-hover-bg:           $navbar-default-link-hover-bg !default;
 $navbar-default-toggle-icon-bar-bg:        $brand-white !default;
-$navbar-default-toggle-border-color:       transparent !default;
+$navbar-default-toggle-border-color:       $brand-white !default;
 
 
 // Inverted navbar
