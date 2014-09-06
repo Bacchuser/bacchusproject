@@ -34,13 +34,20 @@ gem 'bcrypt-ruby', '~> 3.1.2'
 # Manage role and permission ORM independant's way
 gem 'authority'
 
+# Capistrano compatible net-ssh version
+#gem 'net-ssh', '~> 2.8.1'
+
 group :development do
     # Slim, for badass HTML compilation
     # Syntaxe here : https://github.com/slim-template/slim
     gem 'slim-rails', require: true
     # Debugging purpose
     gem 'better_errors'
-    gem "binding_of_caller"
+    gem 'binding_of_caller'
+    # Deployement
+    gem 'capistrano'
+    gem 'capistrano-rvm', github: 'capistrano/rvm'
+    gem 'rvm-capistrano'
 end
 
 group :doc do
