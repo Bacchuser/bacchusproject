@@ -1,13 +1,12 @@
 
 - if cake_plan_user_signed_in?
-
     /! List of my events
     / =====================
     - if not @events_to_admin.nil? and @events_to_admin.count > 0
       .page-header
         h1 Bonjour!
         h4 Allez au boulot!
-        
+
         - for my_event in @events_to_admin
           .my_event.desc.col-lg-3.dashboard-elem
             strong.text-center
@@ -32,10 +31,10 @@
     - else
       .page-header
         h1 Bonjour
-        
+
     /! New event button
     / =====================
-    
+
     .jumbotron
       h1 Gottverdammi nomal!
       p Vous n'avez pas d'évènement :-(  Respirez un grand coup et cliquez là-dessous pour créer le prochain évènement de l'année.
@@ -43,11 +42,11 @@
         a
       = link_to "Nouvel évènement", {:action => :new_event},
         :class => ["btn btn-primary btn-lg"], :style => "margin : 0px 0;"
-      
+
       p
         a
           = render 'devise/menu/registration_items'
-          = render 'devise/menu/login_items'  
+          = render 'devise/menu/login_items'
 
 - else
   .page-header
@@ -57,7 +56,7 @@
     h1 Organisez facilement.
     p Enregistrez-vous dès maintenant ou connectez-vous pour accéder à votre compte.
     p.btn-group
-      a 
+      a
         = render 'devise/menu/registration_items'
         = render 'devise/menu/login_items'
 

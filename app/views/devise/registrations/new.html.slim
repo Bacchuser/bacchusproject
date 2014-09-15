@@ -30,25 +30,28 @@
       = form.submit "Register",
         :class => ["btn", "btn-success", "col-lg-2", "col-lg-offset-2"]
 
-form.form-horizontal
-  fieldset
-      legend Inscription
-      .form-group
-        label.col-lg-2.control-label for="inputEmail"  Email
-        .col-lg-6
-          input#inputEmail.form-control placeholder="Email" autofocus="true" type="text" 
-      .form-group
-        label.col-lg-2.control-label for="inputPassword"  Mot de passe
-        .col-lg-6
-          input#inputPassword.form-control placeholder="Mot de passe" type="password" 
-      .form-group
-        label.col-lg-2.control-label for="inputPassword"  Confirmation
-        .col-lg-6
-          input#inputPassword.form-control placeholder="Veuillez confirmer votre mot de passe" type="password" 
-  
-      .form-group
-        .col-lg-10.col-lg-offset-2
-          button.btn.btn-success type="submit"  S'inscrire
+.form-horizontal
+  = form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |form|
+    fieldset
+        legend Inscription
+        .form-group
+          = form.label :email, "Email", class: ["col-lg-2", "control-label"]
+          .col-lg-6
+            = form.text_field :email, class: ["form-control"], placeholder: "Email", autofocus: "true"
+
+        .form-group
+          = form.label :password, "Mot de passe", class: ["col-lg-2", "control-label"]
+          .col-lg-6
+            = form.password_field :password, class: ["form-control"], placeholder: "Mot de passe"
+
+        .form-group
+          = form.label :password_confirmation, "Confirmation", class: ["col-lg-2", "control-label"]
+          .col-lg-6
+            = form.password_field :password_confirmation, class: ["form-control"], placeholder: "Veuillez confirmer votre mot de passe"
+
+        .form-group
+          .col-lg-10.col-lg-offset-2
+            button.btn.btn-success type="submit"  S'inscrire
 
 
 

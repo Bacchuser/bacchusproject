@@ -28,12 +28,11 @@ html
     / To avoid embedding in Iframe
     = csrf_meta_tags
   body
-  
+
 - if cake_plan_user_signed_in?
- 
     .navbar.navbar-default
       .navbar-header
-        button.navbar-toggle data-target=".navbar-responsive-collapse" data-toggle="collapse" type="button" 
+        button.navbar-toggle data-target=".navbar-responsive-collapse" data-toggle="collapse" type="button"
           span.icon-bar
           span.icon-bar
           span.icon-bar
@@ -41,14 +40,14 @@ html
       .navbar-collapse.collapse.navbar-responsive-collapse
         ul.nav.navbar-nav
           li
-            a href="#" 
-              | Messages 
+            a href="#"
+              | Messages
               span.badge 2
           li
-            a href="#"  Contacts 
+            a href="#"  Contacts
           li.dropdown
-            a.dropdown-toggle data-toggle="dropdown" href="#" 
-              | Evènements 
+            a.dropdown-toggle data-toggle="dropdown" href="#"
+              | Evènements
               span.badge 3
             ul.dropdown-menu
               li
@@ -63,7 +62,7 @@ html
         ul.nav.navbar-nav.navbar-right
           li.dropdown
             a.dropdown-toggle data-toggle="dropdown" href="#"
-              | Aide 
+              | Aide
               b.caret
             ul.dropdown-menu
               li
@@ -72,8 +71,8 @@ html
               li
                 a href="#"  A propos
           li.dropdown
-            a.dropdown-toggle data-toggle="dropdown" href="#" 
-              | Préférences 
+            a.dropdown-toggle data-toggle="dropdown" href="#"
+              | Préférences
               b.caret
             ul.dropdown-menu
               li
@@ -84,7 +83,7 @@ html
               li
                 a href="#"  Déconnexion
 
-    .container role="main"    
+    .container role="main"
       - if notice or alert
         .row
         - if notice
@@ -96,7 +95,7 @@ html
       .row
         .col-lg-11
           == yield
-      	  	  
+
     .navbar.navbar-fixed-bottom
   	  .navbar-collapse.collapse.navbar-responsive-collapse
         ul.breadcrumb
@@ -112,11 +111,11 @@ html
   	      span.icon-bar
   	      span.icon-bar
   	      span.icon-bar
-	  
+
 - else
     .navbar.navbar-default
       .navbar-header
-        button.navbar-toggle data-target=".navbar-responsive-collapse" data-toggle="collapse" type="button" 
+        button.navbar-toggle data-target=".navbar-responsive-collapse" data-toggle="collapse" type="button"
           span.icon-bar
           span.icon-bar
           span.icon-bar
@@ -124,16 +123,14 @@ html
       .navbar-collapse.collapse.navbar-responsive-collapse
         ul.nav.navbar-nav.navbar-right
           li
-            a href="#" 
+            a href="#"
               | Qui sommes-nous?
-          li
-            a href="#" 
-              | Login  
-          li
-            a href="#" 
+          li = link_to new_cake_plan_user_session_path do
+              | Login
+          li = link_to new_cake_plan_user_registration_path do
               | Inscription
-  
-    .container role="main"    
+
+    .container role="main"
       - if notice or alert
         .row
         - if notice
@@ -145,12 +142,12 @@ html
       .row
         .col-lg-11
           == yield
-	  
+
     .navbar.navbar-fixed-bottom
   	  .navbar-collapse.collapse.navbar-responsive-collapse
   	    ul.nav.navbar-nav.navbar-right
   	      li
-  	        a  
+  	        a
   	          | Une Question?
   	        /.modal
               .modal-dialog
@@ -166,18 +163,18 @@ html
                   .modal-footer
                     button.btn.btn-default type="button" data-dismiss="modal"
                       | Fermer
-                    button.btn.btn-primary type="button" 
+                    button.btn.btn-primary type="button"
                       | Envoi
-  	     
+
   	    button.navbar-toggle type="button" class="" data-toggle="collapse" data-target=".navbar-responsive-collapse"
   	      span.icon-bar
   	      span.icon-bar
   	      span.icon-bar
-	  
+
 	  /footer role="footer"
 	  	span
           .credits-footer
-            Copyright &copy; #{@year} Bacchus Project - ISO 9001 fils! 
+            Copyright &copy; #{@year} Bacchus Project - ISO 9001 fils!
 	</div>
 
         =javascript_include_tag "tasks"

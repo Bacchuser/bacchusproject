@@ -1,13 +1,22 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  user_id: 1
-  username: MyString
-  encrypted_password: MyString
-  last_ip: MyString
+normal_user:
+  id: 1
+  username: Pasebakhaen
+  encrypted_password: <%= Devise.bcrypt(CakePlanUser, 'phuTh&nEw6') %>
 
-two:
-  user_id: 1
-  username: MyString
-  encrypted_password: MyString
-  last_ip: MyString
+unicode_user:
+  id: 2
+  username: Ãhmøsè
+  encrypted_password: <%= Devise.bcrypt(CakePlanUser, 'tH&yuCHe2r') %>
+
+korean_user:
+  id: 3
+  username: 댜니앤ㄴ쨤배
+  encrypted_password: <%= Devise.bcrypt(CakePlanUser, 'vey6Ch+beX') %>
+
+script_kiddy:
+  id: 4
+  username: <script type="text/javascript">alert("aiaiai");</script>
+  encrypted_password: <%= Devise.bcrypt(CakePlanUser, 'vey6Ch+beX') %>
+
