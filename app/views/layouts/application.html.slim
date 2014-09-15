@@ -19,12 +19,11 @@ html
     =stylesheet_link_tag "tasks", :media => "all", "data-turbolinks-track" => true
 
     / JAVASCRIPT
+    =javascript_include_tag "application"
     script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=#{GGMap_key()}&sensor=true"
-    =javascript_include_tag "jquery.min"
     =javascript_include_tag "bootstrap.min"
     =javascript_include_tag "html5shiv-printshiv.min"
 
-    </script>
     / To avoid embedding in Iframe
     = csrf_meta_tags
   body
@@ -36,7 +35,8 @@ html
           span.icon-bar
           span.icon-bar
           span.icon-bar
-        a.navbar-brand href="#"  Elza
+        = link_to root_path(), class: [ "navbar-brand"]
+          span Elza
       .navbar-collapse.collapse.navbar-responsive-collapse
         ul.nav.navbar-nav
           li
@@ -76,12 +76,14 @@ html
               b.caret
             ul.dropdown-menu
               li
-                a href="#"  Profil
+                = link_to edit_cake_plan_user_registration_path() do
+                  span Profil
               li
-                a href="#"  Contacts
+                a href="#" Contacts
               li.divider
               li
-                a href="#"  Déconnexion
+                = link_to destroy_cake_plan_user_session_path(), method: :delete do
+                  span  Déconnexion
 
     .container role="main"
       - if notice or alert
@@ -100,8 +102,8 @@ html
   	  .navbar-collapse.collapse.navbar-responsive-collapse
         ul.breadcrumb
           li
-            a href="#"
-              | Home
+            = link_to root_path() do
+              = "| Home"
           li class="active"
               | Dashboard
   	    ul.nav.navbar-nav.navbar-right
@@ -119,7 +121,8 @@ html
           span.icon-bar
           span.icon-bar
           span.icon-bar
-        a.navbar-brand href="#"  Elza
+        = link_to root_path(), class: ["navbar-brand"] do
+          span Elza
       .navbar-collapse.collapse.navbar-responsive-collapse
         ul.nav.navbar-nav.navbar-right
           li
