@@ -12,12 +12,15 @@ class HomeController < ApplicationController
     params.require(:new_task)
 
     @new_task = EventPresenter.new(params[:new_task])
+
     respond_to do |format|
-      if request.post? && @new_task.create(current_cake_plan_user)
+      if @new_task.create(current_cake_plan_user)
         #TODO Redirect to admin page directly
-        format.html { redirect_to admin_event_task_url(@new_task.task), success: 'Event was successfully created.' }
+        flash.now[:success] = 'Event was successfully created.'
+        format.html { redirect_to admin_event_task_url(@new_task.task) }
       else
-        format.html { render action: 'new_event', error: 'Error'}
+        flash.now[:danger] = 'Error creating the event. '
+        format.html { render action: 'new_event' }
       end
     end
   end

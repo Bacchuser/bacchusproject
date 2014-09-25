@@ -11,9 +11,11 @@ class EventPresenter < Presenter
   def_delegators :task, :created_at, :updated_at, :label, :is_visible,
                         :created_at=, :updated_at=, :label=, :is_visible=
 
-  def_delegators :event, :description, :is_public,
-                              :description=, :is_public=, :id, :start_at, :start_at=,
-                              :end_at, :end_at=
+  def_delegators :event,  :id, :description, :is_public, :start_at, :end_at,
+                 :label, :city, :street, :country, :longitude, :latitude,
+                 :label=, :description=, :is_public=, :city=, :street=,
+                 :country=, :longitude=, :latitude=,
+                 :start_at=, :end_at=
 
   def_delegators :admin_user
 
@@ -24,8 +26,6 @@ class EventPresenter < Presenter
   # with a double check (in presenter first, and then in
   # model).
   validates :label, :presence => true
-  validates :start_at, :presence => true
-  validates :end_at, :presence => true
 
   # Get the task, create a new if not set.
   def task; @task ||= Task.new end
