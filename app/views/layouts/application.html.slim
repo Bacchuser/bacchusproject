@@ -27,63 +27,8 @@ html
     / To avoid embedding in Iframe
     = csrf_meta_tags
   body
-
-- if cake_plan_user_signed_in?
-    .navbar.navbar-default
-      .navbar-header
-        button.navbar-toggle data-target=".navbar-responsive-collapse" data-toggle="collapse" type="button"
-          span.icon-bar
-          span.icon-bar
-          span.icon-bar
-        = link_to root_path(), class: [ "navbar-brand"]
-          span Elza
-      .navbar-collapse.collapse.navbar-responsive-collapse
-        ul.nav.navbar-nav
-          li
-            a href="#"
-              | Messages
-              span.badge 2
-          li
-            a href="#"  Contacts
-          li.dropdown
-            a.dropdown-toggle data-toggle="dropdown" href="#"
-              | Evènements
-              span.badge 3
-            ul.dropdown-menu
-              li
-                a href="#"  Evènement 1
-              li
-                a href="#"  Evènement 2
-              li
-                a href="#"  Evènement 3
-              li.divider
-              li
-                a href="#"  Créér un nouvel événement
-        ul.nav.navbar-nav.navbar-right
-          li.dropdown
-            a.dropdown-toggle data-toggle="dropdown" href="#"
-              | Aide
-              b.caret
-            ul.dropdown-menu
-              li
-                a href="#"  FAQ
-              li.divider
-              li
-                a href="#"  A propos
-          li.dropdown
-            a.dropdown-toggle data-toggle="dropdown" href="#"
-              | Préférences
-              b.caret
-            ul.dropdown-menu
-              li
-                = link_to edit_cake_plan_user_registration_path() do
-                  span Profil
-              li
-                a href="#" Contacts
-              li.divider
-              li
-                = link_to destroy_cake_plan_user_session_path(), method: :delete do
-                  span  Déconnexion
+    / Each view can yield a different navbar
+    == yield :navbar
 
     .container role="main"
       - if notice or alert
@@ -98,87 +43,8 @@ html
         .col-lg-11
           == yield
 
-    .navbar.navbar-fixed-bottom
-  	  .navbar-collapse.collapse.navbar-responsive-collapse
-        ul.breadcrumb
-          li
-            = link_to root_path() do
-              = "| Home"
-          li class="active"
-              | Dashboard
-  	    ul.nav.navbar-nav.navbar-right
-  	      li
-  	        a href="#"  Une Question?
-  	    button.navbar-toggle type="button" class="" data-toggle="collapse" data-target=".navbar-responsive-collapse"
-  	      span.icon-bar
-  	      span.icon-bar
-  	      span.icon-bar
+    / Each view can yield a different footer.
+    == yield :footer
 
-- else
-    .navbar.navbar-default
-      .navbar-header
-        button.navbar-toggle data-target=".navbar-responsive-collapse" data-toggle="collapse" type="button"
-          span.icon-bar
-          span.icon-bar
-          span.icon-bar
-        = link_to root_path(), class: ["navbar-brand"] do
-          span Elza
-      .navbar-collapse.collapse.navbar-responsive-collapse
-        ul.nav.navbar-nav.navbar-right
-          li
-            a href="#"
-              | Qui sommes-nous?
-          li = link_to new_cake_plan_user_session_path do
-              | Login
-          li = link_to new_cake_plan_user_registration_path do
-              | Inscription
-
-    .container role="main"
-      - if notice or alert
-        .row
-        - if notice
-          .website_message.notice.col-lg-11.col-lg-offset-2
-            .alert.alert-dismissable.alert-info = notice
-        - if alert
-          .website_message.alert.col-lg-11.col-lg-offset-2
-            .alert.alert-dismissable.alert-danger = alert
-      .row
-        .col-lg-11
-          == yield
-
-    .navbar.navbar-fixed-bottom
-  	  .navbar-collapse.collapse.navbar-responsive-collapse
-  	    ul.nav.navbar-nav.navbar-right
-  	      li
-  	        a
-  	          | Une Question?
-  	        /.modal
-              .modal-dialog
-                .modal-content
-                  .modal-header
-                    button.close type="button" data-dismiss="modal" aria-hidden="true"
-                      | ×
-                    h4.modal-title
-                      | Quoi de neuf?
-                  .modal-body
-                    p
-                      | Laissez-vous aller ici...
-                  .modal-footer
-                    button.btn.btn-default type="button" data-dismiss="modal"
-                      | Fermer
-                    button.btn.btn-primary type="button"
-                      | Envoi
-
-  	    button.navbar-toggle type="button" class="" data-toggle="collapse" data-target=".navbar-responsive-collapse"
-  	      span.icon-bar
-  	      span.icon-bar
-  	      span.icon-bar
-
-	  /footer role="footer"
-	  	span
-          .credits-footer
-            Copyright &copy; #{@year} Bacchus Project - ISO 9001 fils!
-	</div>
-
-        =javascript_include_tag "tasks"
-
+    footer role="footer"
+      = javascript_include_tag "tasks"

@@ -1,3 +1,19 @@
+- content_for(:navbar) do
+  = render partial: 'navbar/sign_in'
+
+/ You need to define breadcrumbs first, and then include footer.
+- content_for(:breadcrumb) do
+  ul.breadcrumb
+    li
+      = link_to root_path() do
+        span | Home
+    li class="active"
+        | Sign in
+
+- content_for(:footer) do
+  /We use a == to let the partial yield something also (breadcrumbs).
+  == render partial: 'footer/' << (cake_plan_user_signed_in? ? 'home_signed_in' : 'home_disconnected')
+
 .form-horizontal
   = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |form|
     fieldset

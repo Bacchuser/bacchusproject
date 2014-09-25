@@ -1,52 +1,69 @@
+- content_for(:navbar) do
+  = render partial: 'navbar/' << (cake_plan_user_signed_in? ? 'home_signed_in' : 'home_diconnected')
+
+/ You need to define breadcrumbs first, and then include footer.
+- content_for(:breadcrumb) do
+  ul.breadcrumb
+    li
+      = link_to root_path() do
+        span | Home
+    li class="active"
+        | Dashboard
+
+- content_for(:footer) do
+  /We use a == to let the partial yield something also (breadcrumbs).
+  == render partial: 'footer/' << (cake_plan_user_signed_in? ? 'home_signed_in' : 'home_disconnected')
+
+
 
 - if cake_plan_user_signed_in?
-    /! List of my events
-    / =====================
-    - if not @events_to_admin.nil? and @events_to_admin.count > 0
-      .page-header
-        h1 Bonjour!
-        h4 Allez au boulot!
+  /! List of my events
+  / =====================
+  - if not @events_to_admin.nil? and @events_to_admin.count > 0
+    .page-header
+      h1 Bonjour!
+      h4 Allez au boulot!
 
-        - for my_event in @events_to_admin
-          .my_event.desc.col-lg-3.dashboard-elem
-            strong.text-center
-              # #{my_event.id}.  #{my_event.label}
-            p.text-center
-              i
-                |
-                  <small>#{my_event.start_at.to_s(:simple)}</small> ~
-                  <small>#{my_event.end_at.to_s(:simple)}</small>
+      - for my_event in @events_to_admin
+        .my_event.desc.col-lg-3.dashboard-elem
+          strong.text-center
+            # #{my_event.id}.  #{my_event.label}
+          p.text-center
+            i
+              |
+                <small>#{my_event.start_at.to_s(:simple)}</small> ~
+                <small>#{my_event.end_at.to_s(:simple)}</small>
 
-            p #{my_event.description}
-            hr
-            .row.text-center
-              .btn-group.btn-group-vertical
-                btn.btn-info.btn-sm ADMINISTRATEUR
-                = link_to "GERER", {:controller => :tasks, :action => :admin_event, :id => my_event.task.id}, {:class => ["btn","btn-default","btn-sm"]}
+          p #{my_event.description}
+          hr
+          .row.text-center
+            .btn-group.btn-group-vertical
+              btn.btn-info.btn-sm ADMINISTRATEUR
+              = link_to "GERER", {:controller => :tasks, :action => :admin_event, :id => my_event.task.id}, {:class => ["btn","btn-default","btn-sm"]}
 
-    / TODO List of events I have subscribe
-    / TODO Invitations of events
-    / List of public events that I have not subscribe
+  / TODO List of events I have subscribe
+  / TODO Invitations of events
+  / List of public events that I have not subscribe
 
-    - else
-      .page-header
-        h1 Bonjour
+  - else
+    .page-header
+      h1 Bonjour
 
-    /! New event button
-    / =====================
+  /! New event button
+  / =====================
 
-    .jumbotron
-      h1 Gottverdammi nomal!
-      p Vous n'avez pas d'évènement :-(  Respirez un grand coup et cliquez là-dessous pour créer le prochain évènement de l'année.
-      p
-        a
-      = link_to "Nouvel évènement", {:action => :new_event},
-        :class => ["btn btn-primary btn-lg"], :style => "margin : 0px 0;"
+  .jumbotron
+    h1 Gottverdammi nomal!
+    p Vous n'avez pas d'évènement :-(  Respirez un grand coup et cliquez là-dessous pour créer le prochain évènement de l'année.
+    p
+      a
+    = link_to "Nouvel évènement", {:action => :new_event},
+      :class => ["btn btn-primary btn-lg"], :style => "margin : 0px 0;"
 
-      p
-        a
-          = render 'devise/menu/registration_items'
-          = render 'devise/menu/login_items'
+    p
+      a
+        = render 'devise/menu/registration_items'
+        = render 'devise/menu/login_items'
 
 - else
   .page-header

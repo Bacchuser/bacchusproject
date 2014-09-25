@@ -1,0 +1,16 @@
+/ Popup for question form
+= render partial: 'footer/questions_modal'
+
+.navbar.navbar-fixed-bottom
+  .navbar-collapse.collapse.navbar-responsive-collapse
+    == yield :breadcrumb
+
+    ul.nav.navbar-nav.navbar-right
+      li
+        a href="#questions" data-toggle="modal"  Une Question?
+
+    button.navbar-toggle type="button" class="" data-toggle="collapse" data-target=".navbar-responsive-collapse"
+      span.icon-bar
+      span.icon-bar
+      span.icon-bar
+

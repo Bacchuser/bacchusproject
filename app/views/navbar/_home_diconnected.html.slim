@@ -1,0 +1,11 @@
+.navbar.navbar-default
+  = render partial: 'navbar/header'
+  .navbar-collapse.collapse.navbar-responsive-collapse
+    ul.nav.navbar-nav.navbar-right
+      li
+        a href="#"
+          | Qui sommes-nous?
+      li = link_to new_cake_plan_user_session_path do
+          | Login
+      li = link_to new_cake_plan_user_registration_path do
+          | Inscription

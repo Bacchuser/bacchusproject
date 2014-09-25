@@ -1,34 +1,20 @@
-/h2 Register
 
-/= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |form|
-  /- if not devise_error_messages!.empty?
-    /.notice.col-lg-10.col-lg-offset-2
-      .alert.alert-dismissable.alert-danger
-        = devise_error_messages!
+- content_for(:navbar) do
+  = render partial: 'navbar/register'
 
-  /.form-vertical
-    /.row.form-group
-      = form.label :email,
-        :class => ["control-label",  "col-lg-2"]
-      = form.email_field :email,
-        :placeholder => "Email", :autofocus => true,
-        :class => "col-lg-10"
+/ You need to define breadcrumbs first, and then include footer.
+- content_for(:breadcrumb) do
+  ul.breadcrumb
+    li
+      = link_to root_path() do
+        span | Home
+    li class="active"
+        | Register
 
-    /.row.form-group
-      = form.label :password,
-        :class => ["control-label", "col-lg-2"]
-      = form.password_field :password,
-        :placeholder => "Password", :class => "col-lg-10"
+- content_for(:footer) do
+  /We use a == to let the partial yield something also (breadcrumbs).
+  == render partial: 'footer/' << (cake_plan_user_signed_in? ? 'home_signed_in' : 'home_disconnected')
 
-    /.row.form-group
-      = form.label :password_confirmation,
-        :class => ["control-label", "col-lg-2"]
-      = form.password_field :password_confirmation,
-        :placeholder => "Password Confirmation", :class => "col-lg-10"
-
-    /.row.form-group
-      = form.submit "Register",
-        :class => ["btn", "btn-success", "col-lg-2", "col-lg-offset-2"]
 
 .form-horizontal
   = form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |form|
