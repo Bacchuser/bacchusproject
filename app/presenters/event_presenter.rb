@@ -26,6 +26,10 @@ class EventPresenter < Presenter
   # with a double check (in presenter first, and then in
   # model).
   validates :label, :presence => true
+  validates :start_at, :presence => true
+  validates :end_at, :presence => true
+  validates :longitude, :presence => true
+  validates :latitude, :presence => true
 
   # Get the task, create a new if not set.
   def task; @task ||= Task.new end

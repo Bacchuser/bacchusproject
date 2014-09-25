@@ -18,7 +18,7 @@
 .col-lg-10
   h1 Create a new event
 
-  = form_for :new_task, url: create_event_home_index_path() do |form|
+  = form_for :task, url: event_index_path() do |form|
 
     - if flash[:danger]
       .alert.alert-danger

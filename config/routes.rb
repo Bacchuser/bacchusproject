@@ -6,12 +6,9 @@ Bacchus::Application.routes.draw do
   # 2. Create a new event (so form and saving behaviour)
   root 'home#main'
   resources :home do
-    collection do
-      get :new_event # Form
-      post :create_event # Saving
-    end
   end
 
+  resources :event
   # All the tasks are managed by the task controller.
   # like this, we can create/edit/display all the different
   # task and their particularities.
