@@ -54,7 +54,8 @@ class EventPresenter < Presenter
     # Go and search for the different admin roles
     # the user has. Then from the tree we will be able to look for
     # the event data.
-    admin_roles = UserAdmin.where("cake_plan_user_id = :user_id", {user_id: user.id} )
+    admin_roles = UserAdmin.where("cake_plan_user_id = :user_id", { user_id: user.id } )
+
     all_tasks_to_admin = []
     admin_roles.each do |admin_role|
       all_tasks_to_admin << self.from_role(admin_role)

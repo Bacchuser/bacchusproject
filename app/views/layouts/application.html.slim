@@ -13,16 +13,11 @@ html
 
     / STYLESHEETS
     link rel="icon" type="image/png" href="/favicon.png"
-    =stylesheet_link_tag "bootswatch.css", :media => "all"
-    =stylesheet_link_tag "bootstrap-responsive.min", :media => "all"
-    =stylesheet_link_tag "home", :media => "all", "data-turbolinks-track" => true
-    =stylesheet_link_tag "tasks", :media => "all", "data-turbolinks-track" => true
+    = stylesheet_link_tag "application", :media => "all", "data-turbolinks-track" => true
 
     / JAVASCRIPT
     =javascript_include_tag "application"
     script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=#{GGMap_key()}&sensor=true"
-    =javascript_include_tag "bootstrap.min"
-    =javascript_include_tag "html5shiv-printshiv.min"
 
     / To avoid embedding in Iframe
     = csrf_meta_tags
@@ -43,8 +38,6 @@ html
         .col-lg-11
           == yield
 
-    / Each view can yield a different footer.
-    == yield :footer
-
     footer role="footer"
-      = javascript_include_tag "tasks"
+      / Each view can yield a different footer.
+      == yield :footer

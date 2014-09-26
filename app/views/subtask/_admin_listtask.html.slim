@@ -1,0 +1,28 @@
+/ Administration of a new listask task
+/ ====
+
+.well
+  h3 = @task.label
+  .form-vertical
+    = form_for :list_task, url: update_leaf_event_subtask_path(id: @task.task_id), html: {name: 'list_task'} do |form|
+      = render "subtask/task", form: form
+      button.btn.btn-success.btn-xs.pull-right type="submit" name="custom[type]" value="list_task"
+        span Save list details
+
+    .well.page-header
+      = form_for :task, url: add_leaf_event_subtask_path(id: @task.task_id) do |form|
+        button.btn.btn-success.btn-lg name="custom[type]" value="list_task_item" type="submit"
+          span.glyphicon.glyphicon-plus &nbsp;
+          span Add an item
+
+    - if @task.items.count > 0
+      table.table.table-responsive.table-striped
+        tbody
+          - @task.items.each do |task|
+            tr
+              td = task.id
+              td = task.description
+
+    - else
+      .alert.alert-info
+        p You don't have any items in your list

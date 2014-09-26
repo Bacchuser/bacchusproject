@@ -1,0 +1,39 @@
+/ Administration of a new simpletask task
+
+.well
+  .form-vertical
+    h3 = @task.label
+    = form_for @task, url: update_leaf_event_subtask_path(id: @task.id, event_id: @event.id), method: :post do |form|
+      = render "subtask/task", form: form
+      .row.form-group
+        = @task.inspect
+        = form.label :start_at,
+          class: ["control-label",  "col-lg-2"]
+        = form.text_field :start_at,
+          class: ["col-lg-10", "js-datepicker", "js-before-calendar"],
+          value: (@task.start_at.to_s(:simple) if not @task.start_at.nil?)
+
+      .row.form-group
+        = form.label :end_at,
+          class: ["control-label",  "col-lg-2"]
+        = form.text_field :end_at,
+          class: ["col-lg-10", "js-datepicker", "js-after-calendar"],
+          value: (@task.end_at.to_s(:simple) if not @task.end_at.nil?)
+
+      .row.form-group
+        = form.label :alert_at,
+          class: ["control-label",  "col-lg-2"]
+        = form.text_field :alert_at,
+          class: ["col-lg-10", "js-datepicker"],
+          value: (@task.alert_at.to_s(:simple) if not @task.alert_at.nil?)
+
+      = form.button class: ["control-label", "btn", "btn-success", "btn-sm", "pull-right"],
+        name: "custom[type]", value: "simple_task" do
+        span Sauver
+
+
+    = form_for @task, url: remove_leaf_event_subtask_path(id: @task.id), method: :delete do |form|
+      = form.button class: ["control-label", "btn", "btn-danger", "btn-sm", "pull-left"] do
+        span Supprimer
+
+    .clearfix

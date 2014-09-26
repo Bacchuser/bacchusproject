@@ -10,18 +10,19 @@
         a href="#"  Contacts
       li.dropdown
         a.dropdown-toggle data-toggle="dropdown" href="#"
-          | Evènements
-          span.badge 3
+          | Evènements&nbsp;
+          span.badge = @events.count if not @events.nil? and @events.count > 0
         ul.dropdown-menu
-          li
-            a href="#"  Evènement 1
-          li
-            a href="#"  Evènement 2
-          li
-            a href="#"  Evènement 3
+          - @events.each do |event|
+            li
+              = link_to event_subtask_index_path(event_id: event.id) do
+                span = event.label
+
           li.divider
           li
-            a href="#"  Créér un nouvel événement
+            = link_to new_event_path() do
+              span Créér un nouvel événement
+
     ul.nav.navbar-nav.navbar-right
       li.dropdown
         a.dropdown-toggle data-toggle="dropdown" href="#"

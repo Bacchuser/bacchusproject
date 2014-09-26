@@ -21,3 +21,8 @@
 
 en:
   hello: "Hello world"
+
+  tasks:
+    type:
+      simple_task: "Tâche simple"
+      list_task: "Tâche en liste"

@@ -1,0 +1,31 @@
+
+- content_for(:navbar) do
+  = render partial: 'navbar/' << (cake_plan_user_signed_in? ? 'home_signed_in' : 'home_diconnected')
+
+- content_for(:breadcrumb) do
+  ul.breadcrumb
+    li
+      = link_to root_path() do
+        span Home
+    li.active
+      span #{@event.label}
+
+- content_for(:footer) do
+  == render partial: 'footer/' << (cake_plan_user_signed_in? ? 'home_signed_in' : 'home_disconnected')
+
+- flash.each do |key, value|
+  .alert class="alert-#{key}"
+    p = value
+
+= render partial: 'event_header'
+.row
+  = render partial: 'event_sidebar'
+  .col-lg-8
+    - if @task
+      = subclass_partial('admin', @task)
+    - else
+      .alert.alert-info.text-center
+        p Vous n'avez pas de tâche pour cet évènement !
+        p Créer une nouvelle tâche :
+        = link_to event_subtask_index_path(), method: :post, class: ["btn", "btn-success", "inline" ]  do
+          span + Tâche

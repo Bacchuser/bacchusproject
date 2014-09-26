@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140925203047) do
+ActiveRecord::Schema.define(version: 20140926091849) do
 
   create_table "cake_plan_users", force: true do |t|
     t.string   "username"
@@ -52,6 +52,25 @@ ActiveRecord::Schema.define(version: 20140925203047) do
     t.string   "country"
     t.float    "latitude"
     t.float    "longitude"
+  end
+
+  create_table "list_task_items", force: true do |t|
+    t.integer  "priority"
+    t.string   "title"
+    t.string   "description"
+    t.datetime "start_at"
+    t.datetime "end_at"
+    t.boolean  "is_active"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "task_id"
+    t.integer  "sort_id"
+  end
+
+  create_table "list_tasks", force: true do |t|
+    t.integer  "task_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "simple_tasks", force: true do |t|

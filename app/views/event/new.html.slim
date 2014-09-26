@@ -31,13 +31,13 @@
               span = value
     .form-vertical
       .row.form-group
-        = form.label :label,
+        = form.label :label, "Titre",
           :class => ["col-lg-2"]
         = form.text_field :label,
           :autofocus => true, :class => ["col-lg-10", "input-sm"]
 
       .row.form-group
-        = form.label :description,
+        = form.label :description, "Description",
           :class => ["col-lg-2"]
 
         = form.text_area :description,
@@ -46,29 +46,29 @@
 
       #map-container.row
         .row.form-group
-            = form.label :map,
-              :class => ["col-lg-2"]
+            = form.label :map, "Carte de l'évènement",
+              :class => ["col-lg-12"]
 
         .row.form-group
-          = form.label :city,
+          = form.label :city, "Ville",
             :class => ["col-lg-2"]
           = form.text_field :city,
             :rows => 10,
-            :class => ["col-lg-10", "map-container", "ville"]
+            :class => ["col-lg-10", "map-container", "city", "input-sm"]
 
         .row.form-group
-          = form.label :street,
+          = form.label :street, "Rue",
             :class => ["col-lg-2"]
           = form.text_field :street,
             :rows => 10,
-            :class => ["col-lg-10",  "map-container", "rue"]
+            :class => ["col-lg-10",  "map-container", "street", "input-sm"]
 
         .row.form-group
-          = form.label :country,
+          = form.label :country, "Pays",
             :class => ["col-lg-2"]
           = form.text_field :country,
             :rows => 10,
-            :class => ["col-lg-10",  "map-container", "pays"]
+            :class => ["col-lg-10",  "map-container", "country", "input-sm"]
 
         .row.form-group
           a.btn.btn-sm.btn-info.geo-refresh.col-lg-5.col-lg-offset-4 href="#you-need-javascript" Refresh Map
@@ -83,26 +83,18 @@
             :class => ["col-lg-3", "map-container", "lng"]
 
       .row.form-group
-        = form.label :start_at,
+        = form.label :start_at, "Commence le",
           :class => ["col-lg-2"]
         = form.date_field :start_at,
-          :class => ["col-lg-10", "date"]
+          :class => ["col-lg-10", "js-datepicker", "js-before-calendar", "input-sm"]
 
       .row.form-group
-        = form.label :end_at,
+        = form.label :end_at, "Finis le",
           :class => ["col-lg-2"]
         = form.date_field :end_at,
-          :class => ["col-lg-10", "date"]
-
-      .row.form-group
-        .col-lg-12
-          = form.check_box :is_visible
-          = form.label :is_visible
-
-      .row.form-group
-        .col-lg-12
-          = form.check_box :is_public
-          = form.label :is_public
+          :class => ["col-lg-10", "js-datepicker", "js-after-calendar", "input-sm"]
 
       .row.actions
-        = form.submit 'Save', :class => ["btn", "btn-success", "btn-lg", "col-lg-3", "col-lg-offset-5"]
+        = form.submit 'Save', :class => ["btn", "btn-success", "btn-large", "col-lg-3", "col-lg-offset-5"]
+
+      .clearfix

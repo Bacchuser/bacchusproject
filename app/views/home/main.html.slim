@@ -6,9 +6,10 @@
   ul.breadcrumb
     li
       = link_to root_path() do
-        span | Home
+        span Home
     li class="active"
-        | Dashboard
+        span Dashboard
+
 
 - content_for(:footer) do
   /We use a == to let the partial yield something also (breadcrumbs).
@@ -19,12 +20,12 @@
 - if cake_plan_user_signed_in?
   /! List of my events
   / =====================
-  - if not @events_to_admin.nil? and @events_to_admin.count > 0
+  - if not @events.nil? and @events.count > 0
     .page-header
       h1 Bonjour!
       h4 Allez au boulot!
 
-      - for my_event in @events_to_admin
+      - @events.each do |my_event|
         .my_event.desc.col-lg-3.dashboard-elem
           strong.text-center
             # #{my_event.id}.  #{my_event.label}
@@ -39,7 +40,8 @@
           .row.text-center
             .btn-group.btn-group-vertical
               btn.btn-info.btn-sm ADMINISTRATEUR
-              = link_to "GERER", {:controller => :tasks, :action => :admin_event, :id => my_event.task.id}, {:class => ["btn","btn-default","btn-sm"]}
+              = link_to event_subtask_index_path(my_event.id), { class: ["btn","btn-default","btn-sm"]} do
+                span GERER
 
   / TODO List of events I have subscribe
   / TODO Invitations of events

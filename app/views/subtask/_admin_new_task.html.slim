@@ -1,0 +1,33 @@
+/ Administration of a general task. Is include by all the sublcasses templates.
+/ (ex:  simple task, task list need to load this template to manage the "core" of the task.)
+/ ====
+
+.well
+  .form-vertical
+
+    = form_for @task , url: define_leaf_event_subtask_path(id: @task.id, event_id: @event.id), method: :post do |form|
+      h2 Task ##{@task.id}
+      .row.form-group
+        = form.label "* Titre",
+          class: ["control-label",  "col-lg-2"]
+        = form.text_field :label,
+          placeholder: "Titre",
+          autofocus: true, class: "col-lg-10"
+      .row.form-group
+        = form.label "* Type",
+          class: ["control-label",  "col-lg-2"]
+        .col-lg-10
+          / TODO use I18n to generate the select field.
+          = select :custom, :type, options_for_select(t("tasks.type").invert)
+      .row.form-group
+        = form.label "* Assigné à",
+          class: ["control-label",  "col-lg-2"]
+        input type="text" class = ["control-label",  "col-lg-10"] placeholder = "Assigné à "
+
+      = form.button "Sauver et Continuer ",
+        class: ["control-label", "btn", "btn-success", "btn-sm", "pull-right"]
+        span Sauver
+
+    = form_for @task, url: remove_leaf_event_subtask_path(id: @task.id) do |form|
+      = form.button "Annuler",
+        class: ["control-label", "btn", "btn-danger", "btn-sm", "pull-left"]
