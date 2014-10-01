@@ -150,30 +150,23 @@ html
   	  .navbar-collapse.collapse.navbar-responsive-collapse
   	    ul.nav.navbar-nav.navbar-right
   	      li
-  	        a  
+  	        /a.btn.btn-primary.btn-lg style="margin : 0px 0;" onclick="=render 'home/gen_question'"
+  	        a.btn.btn-primary.btn-lg style="margin : 0px 0;" href="#questions" data-toggle="modal" 
   	          | Une Question?
-  	        /.modal
-              .modal-dialog
-                .modal-content
-                  .modal-header
-                    button.close type="button" data-dismiss="modal" aria-hidden="true"
-                      | ×
-                    h4.modal-title
-                      | Quoi de neuf?
-                  .modal-body
-                    p
-                      | Laissez-vous aller ici...
-                  .modal-footer
-                    button.btn.btn-default type="button" data-dismiss="modal"
-                      | Fermer
-                    button.btn.btn-primary type="button" 
-                      | Envoi
+  	       
+  	        
+
+    	            
+              /= link_to "gen_question", {:action => :gen_question},
+                :class => ["btn btn-primary btn-lg"], :style => "margin : 0px 0;"
   	     
   	    button.navbar-toggle type="button" class="" data-toggle="collapse" data-target=".navbar-responsive-collapse"
   	      span.icon-bar
   	      span.icon-bar
   	      span.icon-bar
-	  
+  	      
+    = render 'home/gen_question'
+    
 	  /footer role="footer"
 	  	span
           .credits-footer

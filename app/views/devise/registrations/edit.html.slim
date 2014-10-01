@@ -1,0 +1,45 @@
+=form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |form|
+  devise_error_messages
+    
+form.form-horizontal
+  fieldset
+    legend Edit your registration (resource_name.to_s.humanize)
+    .form-group
+      label.col-lg-2.control-label for="inputEmail"  Email
+      .col-lg-6
+        input#inputEmail.form-control placeholder="Email" autofocus="true" type="text" 
+
+    - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+      Currently waiting confirmation for: resource.unconfirmed_email
+
+      .form-group
+        label.col-lg-2.control-label for="inputPassword"  Password
+        .col-lg-6 
+          input#inputPassword.form-control placeholder="Password" type="password" autocomplete="off"
+          i
+            | (leave blank if you don't want to change it)
+          br
+        label.col-lg-2.control-label for="inputPassword"  Password confirmation
+        .col-lg-6 
+          input#inputPassword.form-control placeholder="Password" type="current password" autocomplete="off"
+          i
+            | (we need your current password to confirm your changes)
+          br  
+        
+    .form-group
+      .col-lg-10.col-lg-offset-2
+        button.btn.btn-default Cancel
+        button.btn.btn-success type="submit"  Submit    
+        br
+        br
+  fieldset
+    legend Delete your account
+    .form-group
+      .col-lg-10.col-lg-offset-2
+        button.btn.btn-danger type="submit"
+          | Burn all my stuff 
+          
+  /=button_to "Cancel my account", registration_path(resource_name), 
+    /:data => { :confirm => "Are you sure?" }, :method => :delete
+
+/=link_to "Back", :back

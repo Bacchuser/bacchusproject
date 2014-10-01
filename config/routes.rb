@@ -11,6 +11,8 @@ Bacchus::Application.routes.draw do
       post :create_event # Saving
     end
   end
+  
+  resources :question
 
   # All the tasks are managed by the task controller.
   # like this, we can create/edit/display all the different

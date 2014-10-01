@@ -9,6 +9,10 @@ class HomeController < ApplicationController
 
   end
 
+  def gen_question
+
+  end
+
   def create_event
     params.require(:new_task)
 

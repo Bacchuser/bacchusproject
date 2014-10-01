@@ -1,13 +1,25 @@
-h2 Resend confirmation instructions
+/h2 Resend confirmation instructions
 
 = form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post }) do |form|
   = devise_error_messages!
 
-  .field
+  /.field
     = form.label :email
     = form.email_field :email, :autofocus => true
 
-  .field
+  /.field
     = form.submit "Resend confirmation instructions"
+    
+    
+form.form-horizontal
+  fieldset
+      legend Resend confirmation instructions
+      .form-group
+        label.col-lg-2.control-label for="inputEmail"  Email
+        .col-lg-6
+          input#inputEmail.form-control placeholder="Email" autofocus="true" type="text" 
+      .form-group
+        .col-lg-10.col-lg-offset-2
+          button.btn.btn-success type="submit"  Pullup!  
 
 = render "devise/shared/links"
