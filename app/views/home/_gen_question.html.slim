@@ -1,0 +1,20 @@
+/ All user, even not registred can create an event
+
+
+/= form_for :gen_question, :url => {:action=>'gen_question'} do |form|
+#questions.modal
+  .modal-dialog
+    = form_for :question, :url => question_index_path() do |form|
+      .modal-content
+        .modal-header
+          button.close type="button" data-dismiss="modal" aria-hidden="true"
+            | ×
+          h4.modal-title
+            | Quoi de neuf?
+        .modal-body
+          = form.text_area :content, class: ["form-control"]
+        .modal-footer
+          button.btn.btn-default type="button" data-dismiss="modal"
+            | Fermer
+          button.btn.btn-primary type="button" 
+            | Envoi         
