@@ -71,6 +71,7 @@ class Task < ActiveRecord::Base
     if self.right_tree.nil? or self.left_tree.nil? or self.event_id.nil?
       raise "Tree corrupted : parent not exists\n" + inspect
     end
+
     Task.transaction do
       # create an empty space in the tree
       right_update = Task.where("""
