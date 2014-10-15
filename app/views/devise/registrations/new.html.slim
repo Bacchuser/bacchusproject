@@ -1,3 +1,5 @@
+/ S'inscrire
+
 
 - content_for(:navbar) do
   = render partial: 'navbar/register'
@@ -7,9 +9,9 @@
   ul.breadcrumb
     li
       = link_to root_path() do
-        span #{"/ Home"}
+        span #{" Acceuil"}
     li class="active"
-        span #{"/ Register"}
+        span #{" Inscription"}
 
 - content_for(:footer) do
   /We use a == to let the partial yield something also (breadcrumbs).

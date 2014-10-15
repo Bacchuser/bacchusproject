@@ -1,5 +1,21 @@
 /h2 Forgot your password?
 
+- content_for(:navbar) do
+  = render partial: 'navbar/help'
+
+/ You need to define breadcrumbs first, and then include footer.
+- content_for(:breadcrumb) do
+  ul.breadcrumb
+    li
+      = link_to root_path() do
+        span #{" Acceuil"}
+    li class="active"
+        span #{" Modifier mon mot de passe"}
+
+- content_for(:footer) do
+  /We use a == to let the partial yield something also (breadcrumbs).
+  == render partial: 'footer/' << (cake_plan_user_signed_in? ? 'home_signed_in' : 'home_disconnected')
+
 = form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |form|
   = devise_error_messages!
 
@@ -13,14 +29,14 @@
     
 form.form-horizontal
   fieldset
-      legend Forgot your password?
+      legend Oublié votre mot de passe?
       .form-group
         label.col-lg-2.control-label for="inputEmail"  Email
         .col-lg-6
-          input#inputEmail.form-control placeholder="Email" autofocus="true" type="text" 
+          input#inputEmail.form-control placeholder="Votre Email" autofocus="true" type="text" 
       .form-group
         .col-lg-10.col-lg-offset-2
-          button.btn.btn-success type="submit"  Help me!
+          button.btn.btn-success type="submit"  Aidez-moi!
     
 
 = render "devise/shared/links"

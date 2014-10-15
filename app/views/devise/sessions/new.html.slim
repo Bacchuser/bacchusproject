@@ -6,9 +6,9 @@
   ul.breadcrumb
     li
       = link_to root_path() do
-        span Home
+        span Acceuil
     li class="active"
-        span Sign in
+        span Inscription
 
 - content_for(:footer) do
   /We use a == to let the partial yield something also (breadcrumbs).
@@ -17,7 +17,7 @@
 .form-horizontal
   = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |form|
     fieldset
-      legend Sign in
+      legend S'inscrire
       .form-group
         = form.label :email,
           "Email",
@@ -30,21 +30,21 @@
 
       .form-group
         = form.label :password,
-          "Password",
+          "Mot de passe",
           class: ["col-lg-2", "control-label"]
         .col-lg-6
-          = form.password_field :password,
+          = form.password_field :Password,
             class: ["form-control"],
-            placeholder:"Password",
+            placeholder:"Mot de passe",
             autofocus: "true"
 
           .checkbox
             = form.label :remember_me, ""
               = form.check_box :remember_me
-              span | Remember Me
+              span Se souvenir de moi
       .form-group
         .col-lg-10.col-lg-offset-2
-          button.btn.btn-default Cancel
-          button.btn.btn-success type="submit"  Submit
+          button.btn.btn-default Annuler
+          button.btn.btn-success type="submit"  Confirmer
 
 = render "devise/shared/links"
