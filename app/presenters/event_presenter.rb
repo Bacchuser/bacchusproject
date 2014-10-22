@@ -8,10 +8,10 @@
 # [ ] Add real exceptions, not raising std Exception with messages !
 class EventPresenter < Presenter
   # http://blog.jayfields.com/2007/03/rails-presenter-pattern.html
-  def_delegators :task, :created_at, :updated_at, :label, :is_visible,
+  def_delegators :task, :id, :created_at, :updated_at, :label, :is_visible,
                         :created_at=, :updated_at=, :label=, :is_visible=
 
-  def_delegators :event,  :id, :description, :is_public, :start_at, :end_at,
+  def_delegators :event, :task_id, :description, :is_public, :start_at, :end_at,
                  :label, :city, :street, :country, :longitude, :latitude,
                  :label=, :description=, :is_public=, :city=, :street=,
                  :country=, :longitude=, :latitude=,
@@ -110,8 +110,11 @@ class EventPresenter < Presenter
       event.save!
       task.root_for_event! (event)
       task.save!
-      event.task = task
+
+      event.task_id = task.id
+      task.event_id = task.id
       event.save!
+      task.save!
 
       # Assign the admin roles to the creator
       admin_user.task = task

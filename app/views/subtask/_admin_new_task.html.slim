@@ -5,7 +5,7 @@
 .well
   .form-vertical
 
-    = form_for @task , url: define_leaf_event_subtask_path(id: @task.id, event_id: @event.id), method: :post do |form|
+    = form_for @task , url: define_leaf_event_subtask_path(id: @task.id, event_id: @event.task_id), method: :post do |form|
       h2 Task ##{@task.id}
       .row.form-group
         = form.label "* Titre",
@@ -28,6 +28,6 @@
         class: ["control-label", "btn", "btn-success", "btn-sm", "pull-right"]
         span Sauver
 
-    = form_for @task, url: remove_leaf_event_subtask_path(id: @task.id) do |form|
+    = form_for @task, url: remove_leaf_event_subtask_path(id: @task.id,  event_id: @event.task_id), method: :delete do |form|
       = form.button "Annuler",
         class: ["control-label", "btn", "btn-danger", "btn-sm", "pull-left"]

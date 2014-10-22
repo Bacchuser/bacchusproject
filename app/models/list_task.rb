@@ -1,7 +1,7 @@
 require 'forwardable'
 
 class ListTask < ActiveRecord::Base
-  belongs_to :task, dependent: :destroy
+  belongs_to :task
 
   extend Forwardable
 
@@ -14,13 +14,19 @@ class ListTask < ActiveRecord::Base
 
   def items
     if @items.nil?
-      @items = ListTaskItem.where( { task_id: self.task_id } ).order( { sort_id: :asc, id: :desc } )
+      @items = []
+      self.task.children.each do |task|
+        @items << task.subtask
+      end
     end
     @items
   end
 
   def save_attributes(params)
-    to_save = params.permit()
-    raise to_save.inspect
+    to_save = params.permit(:description)
+    ListTask.transaction do
+      self.description = to_save[:description]
+      self.save!
+    end
   end
 end

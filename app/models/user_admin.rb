@@ -4,8 +4,8 @@ class UserAdmin < ActiveRecord::Base
   #   be an admin of all the different task, and the
   #   goal of permission tree, is to manage such relation !
 
-  belongs_to :cake_plan_user, dependent: :destroy
-  belongs_to :task, dependent: :destroy
+  belongs_to :cake_plan_user
+  belongs_to :task
 
   def user_role
     self.cake_plan_user

@@ -12,6 +12,7 @@ class EventController < ApplicationController
         format.html { redirect_to event_subtask_index_url(@new_task.task) }
       else
         flash.now[:danger] = 'Error creating the event. '
+        raise @new_task.errors.inspect
         format.html { redirect_to new_event_path() }
       end
     end

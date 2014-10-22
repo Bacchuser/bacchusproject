@@ -6,8 +6,19 @@
   .form-vertical
     = form_for :list_task, url: update_leaf_event_subtask_path(id: @task.task_id), html: {name: 'list_task'} do |form|
       = render "subtask/task", form: form
+
+      .row.form-group
+        = form.label  :description, "Commentaire sur la liste",
+          class: ["control-label",  "col-lg-2"]
+        .col-lg-10
+          = form.text_area :description, class: ['form-control'], value: @task.description
+
       button.btn.btn-success.btn-xs.pull-right type="submit" name="custom[type]" value="list_task"
         span Save list details
+
+    = form_for @task, url: remove_leaf_event_subtask_path(id: @task.task_id), method: :delete do |form|
+      = form.button class: ["control-label", "btn", "btn-danger", "btn-sm", "pull-left"] do
+        span Supprimer
 
     .well.page-header
       = form_for :task, url: add_leaf_event_subtask_path(id: @task.task_id) do |form|
@@ -18,11 +29,17 @@
     - if @task.items.count > 0
       table.table.table-responsive.table-striped
         tbody
-          - @task.items.each do |task|
+          - @task.items.each_with_index do |task, index|
             tr
-              td = task.id
-              td = task.description
-
+              td = index
+              td
+                = form_for :list_task_item, url: update_leaf_event_subtask_path(id: task.task_id), html: {name: 'list_task_item'} do |form|
+                  .row
+                    .col-xs-10
+                      = form.text_area :description, value: task.description, class: ['form-control'], row: 5, col: 15
+                    .col-xs-2
+                      button.btn.btn-success.btn-xs type="submit" name="custom[type]" value="list_task_item"
+                        span Save
     - else
       .alert.alert-info
         p You don't have any items in your list

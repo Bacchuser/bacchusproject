@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141022150946) do
+ActiveRecord::Schema.define(version: 20141022160946) do
 
   create_table "cake_plan_users", force: true do |t|
     t.string   "username"
@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 20141022150946) do
     t.integer  "task_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "description"
   end
 
   create_table "simple_tasks", force: true do |t|

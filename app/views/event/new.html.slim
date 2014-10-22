@@ -15,12 +15,13 @@
   /We use a == to let the partial yield something also (breadcrumbs).
   == render partial: 'footer/' << (cake_plan_user_signed_in? ? 'home_signed_in' : 'home_disconnected')
 
+
 .col-lg-10
   h1 Create a new event
 
   = form_for :task, url: event_index_path() do |form|
 
-    - if flash[:danger]
+    - if not @new_task.nil?
       .alert.alert-danger
         h3 = flash[:danger]
         ul
@@ -97,4 +98,4 @@
       .row.actions
         = form.submit 'Save', :class => ["btn", "btn-success", "btn-large", "col-lg-3", "col-lg-offset-5"]
 
-      .clearfix
+      .clearfix.page-header

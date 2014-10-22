@@ -9,7 +9,12 @@ class ListTaskItem < ActiveRecord::Base
   def has_subtask?; false  end
 
   def save_attributes(params)
-    to_save = params.permit(:sort_id)
-    raise to_save.inspect
+    to_save = params.permit(:description)
+    ListTaskItem.transaction do
+      self.description = to_save[:description]
+      self.save!
+    end
   end
+
+
 end

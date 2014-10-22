@@ -31,7 +31,7 @@
         span Sauver
 
 
-    = form_for @task, url: remove_leaf_event_subtask_path(id: @task.id), method: :delete do |form|
+    = form_for @task, url: remove_leaf_event_subtask_path(id: @task.task_id), method: :delete do |form|
       = form.button class: ["control-label", "btn", "btn-danger", "btn-sm", "pull-left"] do
         span Supprimer
 

@@ -17,7 +17,7 @@ class Task < ActiveRecord::Base
         event_id = :event_id
         AND left_tree >= :left_tree
         AND right_tree <= :right_tree """,
-        { event_id: self.event_id, left_tree: self.left_tree, right_tree: self.right_tree } )
+        { event_id: self.id, left_tree: self.left_tree, right_tree: self.right_tree } )
       childs_and_me.delete_all
 
       # Update tree
@@ -27,7 +27,7 @@ class Task < ActiveRecord::Base
         { event_id: self.event_id, left_tree: self.left_tree } )
       left_part = Task.where("""
         event_id = :event_id
-        AND left_tree > :left_tree """, { event_id: event_id, left_tree: left_tree } )
+        AND left_tree > :left_tree """, { event_id: id, left_tree: left_tree } )
 
       offset = self.right_tree - self.left_tree + 1
       right_part.update_all(["right_tree = right_tree - :offset", { offset: offset } ])
@@ -77,27 +77,32 @@ class Task < ActiveRecord::Base
       raise "Tree corrupted : parent not exists\n" + inspect
     end
 
+    right_tree = self.right_tree
+    event_id = self.event_id
+    new_task = Task.new do |task|
+      task.left_tree = right_tree
+      task.right_tree = right_tree + 1
+      task.tree_level = self.tree_level + 1
+      task.event_id = event_id
+    end
+
     Task.transaction do
       # create an empty space in the tree
       right_update = Task.where("""
         event_id = :event_id
-        AND right_tree >= :right_tree """, { event_id: self.event_id, right_tree: self.right_tree } )
-      right_update.update_all right_tree: "right_tree + 2"
+        AND right_tree >= :right_tree """, { event_id: event_id, right_tree: right_tree } )
+      right_update.update_all "right_tree = right_tree + 2"
 
       left_update = Task.where("""
         event_id = :event_id
-        AND left_tree >= :right_tree """, { event_id: self.event_id, right_tree: self.right_tree } )
-      left_update.update_all left_tree: "left_tree + 2"
+        AND left_tree >= :right_tree """, { event_id: event_id, right_tree: right_tree } )
+      left_update.update_all "left_tree = left_tree + 2"
 
-      new_task = Task.new do |task|
-        task.left_tree = self.right_tree
-        task.right_tree = self.right_tree + 1
-        task.tree_level = self.tree_level + 1
-        task.event_id = self.event_id
-      end
-
-      return new_task
+      new_task.save!
     end
+
+    self.reload
+    return new_task
   end
 
   #
@@ -120,6 +125,19 @@ class Task < ActiveRecord::Base
     end
   end
 
+  def children
+    result = Task.where("""
+      event_id = :event_id
+      AND right_tree < :right_tree
+      AND left_tree > :left_tree """,
+      { event_id: self.event_id,
+        right_tree: self.right_tree,
+        left_tree: self.left_tree,
+        tree_level: self.tree_level + 1 })
+
+    return result
+  end
+
   #
   # Create a root for a new task, with a incremented event_id.
   # The model is not saved in DB. Please use the .save() method
@@ -130,7 +148,6 @@ class Task < ActiveRecord::Base
       raise "Event ID is null !"
     end
 
-    self.event_id = event.id
     self.tree_level = 1
     self.left_tree = 1
     self.right_tree = 2
