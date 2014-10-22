@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140926091849) do
+ActiveRecord::Schema.define(version: 20141022150946) do
 
   create_table "cake_plan_users", force: true do |t|
     t.string   "username"
@@ -88,8 +88,8 @@ ActiveRecord::Schema.define(version: 20140926091849) do
     t.string   "label"
     t.boolean  "is_visible"
     t.integer  "event_id"
-    t.string   "subclass_name"
-    t.integer  "subclass_id"
+    t.string   "subtask_name"
+    t.integer  "subtask_id"
     t.integer  "tree_level"
     t.integer  "left_tree"
     t.integer  "right_tree"

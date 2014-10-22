@@ -1,16 +1,15 @@
 module SubtaskHelper
 
-  def subclass_partial(prefix, task)
-    if task.subclass?
+  def subtask_partial(prefix, task)
+    if task.is_subtask?
       render partial: prefix << "_" << task.class.name.demodulize.downcase
     else
       render partial: prefix << "_" << 'new_task'
     end
   end
 
-  def status(task)
-    return "new" if task.new?
-    return "active" if not @task.nil? and ((@task.new? and task.id == @task.id) or (not @task.new? and task.id == @task.task_id))
+  def status(subtask)
+    return "active" if not @task.nil? and (subtask.id == @task.id)
   end
 
   def navigation_class(task)

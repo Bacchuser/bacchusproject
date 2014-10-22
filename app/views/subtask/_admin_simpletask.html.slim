@@ -3,10 +3,9 @@
 .well
   .form-vertical
     h3 = @task.label
-    = form_for @task, url: update_leaf_event_subtask_path(id: @task.id, event_id: @event.id), method: :post do |form|
+    = form_for @task, url: update_leaf_event_subtask_path(id: @task.task_id, event_id: @event.id), method: :post do |form|
       = render "subtask/task", form: form
       .row.form-group
-        = @task.inspect
         = form.label :start_at,
           class: ["control-label",  "col-lg-2"]
         = form.text_field :start_at,

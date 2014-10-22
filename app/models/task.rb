@@ -1,9 +1,9 @@
 # A generic n-ary tree, You can add childs, remove a node and it's child,
 # and get some properties such as level, type(node, leaf).
 class Task < ActiveRecord::Base
-  SUBCLASS_CLASSES = {}
+  SUBTASK_CLASSES = {}
   [SimpleTask, ListTask, ListTaskItem].each do |class_var|
-    SUBCLASS_CLASSES[class_var.model_name.singular] = class_var
+    SUBTASK_CLASSES[class_var.model_name.singular] = class_var
   end
 
   #
@@ -44,22 +44,27 @@ class Task < ActiveRecord::Base
   end
 
   def new?
-    subclass.nil?
+    subtask.nil?
   end
 
-  def subclass?
-    not self.subclass.nil?
+  def is_subtask?
+    false
   end
 
-  def subclass
-    return nil if self.subclass_name.nil?
-    unless Task::SUBCLASS_CLASSES.has_key? self.subclass_name
-      raise "Subclass " + self.subclass_name + " not allowed"
+  def has_subtask?
+    not self.subtask.nil?
+  end
+
+  def subtask
+    return nil if self.subtask_name.nil?
+
+    unless Task::SUBTASK_CLASSES.has_key? self.subtask_name
+      raise "Subtask " + self.subtask_name + " not allowed"
     end
-    if @task_subclass.nil?
-      @task_subclass = Task::SUBCLASS_CLASSES[self.subclass_name].where("task_id = :task_id", { task_id: self.id }).first
+    if @task_subtask.nil?
+      @task_subtask = Task::SUBTASK_CLASSES[self.subtask_name].where("id = :id", { id: self.subtask_id }).first
     else
-      @task_subclass
+      @task_subtask
     end
   end
 
