@@ -16,8 +16,8 @@ html
     = stylesheet_link_tag "application", :media => "all", "data-turbolinks-track" => true
 
     / JAVASCRIPT
-    =javascript_include_tag "application"
     script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=#{GGMap_key()}&sensor=true"
+    =javascript_include_tag "application"
 
     / To avoid embedding in Iframe
     = csrf_meta_tags
