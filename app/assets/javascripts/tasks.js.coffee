@@ -51,9 +51,9 @@ class Position
 #
 class GeoEncoderListener
   _encoder: new google.maps.Geocoder()
-  _ville: $(MAP_CONTAINER).find(".map-container.ville")
-  _rue: $(MAP_CONTAINER).find(".map-container.rue")
-  _pays: $(MAP_CONTAINER).find(".map-container.pays")
+  _ville: $(MAP_CONTAINER).find(".map-container.city")
+  _rue: $(MAP_CONTAINER).find(".map-container.street")
+  _pays: $(MAP_CONTAINER).find(".map-container.country")
   _button_refresh: $(MAP_CONTAINER).find(".btn.geo-refresh")
 
   _last_update: $.now()
