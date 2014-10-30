@@ -2,10 +2,21 @@
   = render partial: 'navbar/header'
   .navbar-collapse.collapse.navbar-responsive-collapse
     ul.nav.navbar-nav.navbar-right
-      li
-        a href="#"
-          | Qui sommes-nous?
+      li = link_to new_cake_plan_user_registration_path do
+          | Inscription  
       li = link_to new_cake_plan_user_session_path do
           | Se connecter
-      li = link_to new_cake_plan_user_registration_path do
-          | Inscription
+      li.dropdown
+        a.dropdown-toggle data-toggle="dropdown" href="#"
+          | A propos
+          b.caret
+        ul.dropdown-menu
+          li
+            a href="#"  Fonctionnement
+          li
+            a href="#"  Abonnements
+          li
+            a href="#"  Team  
+          li.divider
+          li
+            a href="#"  FAQ

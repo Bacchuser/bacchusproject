@@ -17,7 +17,7 @@
 .form-horizontal
   = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |form|
     fieldset
-      legend S'inscrire
+      legend Se connecter
       .form-group
         = form.label :email,
           "Email",
@@ -47,4 +47,6 @@
           button.btn.btn-default Annuler
           button.btn.btn-success type="submit"  Confirmer
 
-= render "devise/shared/links"
+        /.form-group
+          .col-lg-10.col-lg-offset-2
+            = render "devise/shared/links"
